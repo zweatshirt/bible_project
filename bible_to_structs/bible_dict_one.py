@@ -47,13 +47,13 @@ class PrimaryBibleDict:
                 word, strongs = remove_strongs(word)
                 verse.append(word)
                 break
-            print("out", word, "i", bible_lst[i])
-            print("out", word, "i + 1", bible_lst[i + 1])
+
             # look at anything that isn't a chapter, psalm, or book title
 
             if i != 0 and bible_lst[i - 1] != book:
-                if not (word == 'chapter' or word == 'psalm') and not bible_lst[i + 1].isdigit():
-                    print("in", word, bible_lst[i])
+                print(bible_lst[i], 'i')
+                print(bible_lst[i + 1])
+                if (word != 'chapter' or word != 'psalm') and not (bible_lst[i + 1].isdigit()):
                     # check for Strongs, save, and remove from word
 
                     # if word is a verse num
@@ -67,7 +67,7 @@ class PrimaryBibleDict:
 
                     if verse_num not in bible_dict[book][chapter]:
                         bible_dict[book][chapter][verse_num] = verse
-                    if i == 30:
+                    if i == 15:
                         break
         return bible_dict
 
