@@ -106,8 +106,9 @@ def bible_to_dict_two(bible_lst: []) -> {}:
 
 
 # returns word occurrence count
-def get_occ(word: str, bible_dict: {}) -> int:
-    return bible_dict[word][0]
+def get_word_occ(word: str, bible_dict: {}) -> int:
+    print('There is a total of {} occurrences for the word {}.'.format(occurences := bible_dict[word][0], word))
+    return occurences
 
 
 def get_strongs(word: str, bible_dict: {}) -> str:
@@ -122,13 +123,15 @@ def total_strongs(word: str, strongs_dict: {}) -> int:
     return count
 
 
-def strongs_occ_per_word(word: str, strongs_dict: {}):
+def get_strongs_occ_per_word(word: str, strongs_dict: {}) -> []:
+    lst = []
     for k, v in strongs_dict[word][1].items():
-        print('There is a total of {} occurrences of the index {} for the word {}.'.format(word, v, k))
+        print('There is a total of {} occurrences of the index {} for the word {}.'.format(v, k, word))
+        lst.append((k, v))
     # keys = words_dict['and'][1].keys()
     # for key in keys:
     #     count += words_dict['and'][1][key]
-    # print(count)
+    return lst
 
 
 def get_keys(d: {}):
@@ -155,6 +158,10 @@ if __name__ == '__main__':
     bible_dct_two = bible_to_dict_two(cleaned_words)
     print(bible_dct_two)
 
+    strongs_occ_list = get_strongs_occ_per_word('god', bible_dct_two)
+
+    god_occ = get_word_occ('god', bible_dct_two)
+    print(god_occ)
     # print(words_dict)
     # print(total_strongs('god', words_dict))
     # print(strongs_occ_per_word('god', words_dict))
