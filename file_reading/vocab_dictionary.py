@@ -24,15 +24,6 @@ def append_api_data(file_name: str, d: DictTwo or []):
                 f.write("{}\n".format(json_data))
 
 
-def extract_file_lines(file_name: str) -> []:
-    with open(file_name, 'r', encoding='utf-8') as f:
-        lst = [line.strip() for line in f]
-
-    return lst
-
-
 def read_json_file(file_name) -> []:
-    json_data = []
-
     with open(file_name, 'r') as f:
         return [loads(line) for line in f if line.strip()]
