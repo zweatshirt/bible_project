@@ -1,7 +1,7 @@
-from bible_to_structs.bible_dict_parent import *
+from bible_to_dicts.bible_dictionary import *
 
 
-# from bible_to_structs.helpers import remove_strongs, get_keys
+# from bible_to_dicts.helpers import remove_strongs, get_keys
 
 
 # bible -> book -> chapter -> verse -> words

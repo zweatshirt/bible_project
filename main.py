@@ -1,26 +1,25 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 from file_reading.bible_reading import *
-from bible_to_structs.bible_dict_one import DictOne
-from bible_to_structs.bible_dict_two import DictTwo
+from bible_to_dicts.dict_one import DictOne
+from bible_to_dicts.dict_two import DictTwo
 from file_reading.vocab_dictionary import append_api_data, read_json_file
 
 if __name__ == '__main__':
+    # read the bible and store as string
     bible = read_bible('kjv_strongs.txt')
 
-    cleaned_words = clean_bible(bible)
+    # list of each word in the bible
+    # lower cased and rid of punctuation
+    cleaned_words = clean_bible(bible)  # needs work
+
+    # bible -> book -> chapter -> verse -> words
+    # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_words)
-    # print(bible_dct.dict['zephaniah'][3][20])
-    # print(len(bible_dct.dict['zephaniah'][3][21]))
+
+    # word -> [word occurrence count, {Strong's: Strong's occurrence count}]
+    # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
 
-
-    json_dct = read_json_file('/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json')
-    # go through b_two to check if the word is in json_dct
-    # if not try to use API for it again
-
-    # lst = [i[0]['word'] for i in json_dct]
-
-
+    # List of JSON of as many words in the bible as possible with definitions
+    f_name = '/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json'
+    dictionary_json = read_json_file(f_name)
+    print(dictionary_json)
