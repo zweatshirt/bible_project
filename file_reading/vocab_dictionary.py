@@ -12,13 +12,13 @@ def get_api_data(word: str, sleep_time, sleep_count=0) -> str:  # returns JSON
     except requests.exceptions.HTTPError:
         sleep_count += 1
         sleep(sleep_time)
-        get_api_data(word, sleep_count)
+        get_api_data(word, sleep_time, sleep_count)
 
 
 def append_api_data(file_name: str, d: DictTwo or []):
     with open(file_name, 'a', encoding='utf-8') as f:
         for k in d:
-            json_data = get_api_data(k)
+            json_data = get_api_data(k, 60)
             if 'No Definitions Found' not in json_data[10:31]:
                 print(json_data)
                 f.write("{}\n".format(json_data))
