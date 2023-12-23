@@ -1,18 +1,18 @@
 from json import loads
-from requests import get
+import requests
 from time import sleep
 
 from bible_to_structs.bible_dict_two import DictTwo
 
 
-# extremely buggy, needs to be rewritten
-def get_api_data(word: str) -> str:  # returns JSON
-    res = get('https://api.dictionaryapi.dev/api/v2/entries/en/' + word)
-    print(res.text)
-    if res.status_code == 429 or 'Too many requests' in res.text:
-        sleep(90)
-        get_api_data(word)
-    return res.text
+def get_api_data(word: str, sleep_time, sleep_count=0) -> str:  # returns JSON
+    try:
+        res = requests.get('https://api.dictionaryapi.dev/api/v2/entries/en/' + word, timeout=5)
+        return res.text
+    except requests.exceptions.HTTPError:
+        sleep_count += 1
+        sleep(sleep_time)
+        get_api_data(word, sleep_count)
 
 
 def append_api_data(file_name: str, d: DictTwo or []):
@@ -33,8 +33,10 @@ def extract_file_lines(file_name: str) -> []:
 
 def read_json_file(file_name) -> []:
     json_data = []
+
     with open(file_name, 'r') as f:
         for line in f:
             if line.strip():
                 json_data.append(loads(line))
+
     return json_data

@@ -18,22 +18,9 @@ if __name__ == '__main__':
 
 
     json_dct = read_json_file('/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json')
-
-
     # go through b_two to check if the word is in json_dct
     # if not try to use API for it again
 
     # lst = [i[0]['word'] for i in json_dct]
-    # lst2 = []
-    # for key in b_two.keys():
-    #     if key not in lst:
-    #         lst2.append(key)
-    lst2 = []
-    print(lst2)
-    with open('/Users/zachjlinscott/PycharmProjects/bible_parser/additional_words_not_in_dictionary', 'r', encoding='utf-8') as f:
-        for line in f:
-            lst2.append(line.replace('\n', ''))
-
-    append_api_data('/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary', lst2)
 
 
