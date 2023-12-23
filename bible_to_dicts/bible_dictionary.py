@@ -10,7 +10,8 @@ class BibleDictionary(UserDict):
         pass
 
     # removes Strong's from a word and returns the word and Strong's
-    def remove_strongs(self, word: str) -> (str, str):
+    @staticmethod
+    def remove_strongs(word: str) -> (str, str):
         strongs = ''
         if '{' in word:
             strongs = tuple(findall('\{.*?\}', word))
@@ -18,8 +19,8 @@ class BibleDictionary(UserDict):
         return word, strongs
 
     # recursive function to get every single key in a nested dictionary
-    def yield_all_keys(self, d: {}):
-        for key, value in d.items():
+    def yield_all_keys(self):
+        for key, value in self.data.items():
             if type(value) is dict:
                 yield from self.yield_all_keys(value)
             else:
