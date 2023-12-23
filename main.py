@@ -19,7 +19,8 @@ if __name__ == '__main__':
     # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
 
-    print(b_two.get_total_strongs('god'))
+    print(b_two.get_strongs_for_word('god'))
+    print(b_two.get_word_strongs_tuple_for('god'))
 
     # List of JSON of as many words in the bible as possible with definitions
     f_name = '/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json'

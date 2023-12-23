@@ -35,21 +35,17 @@ class DictTwo(BibleDictionary):
         return words_dict
 
     # returns word occurrence count given a word
-    def get_word_occ(self, word: str) -> int:
+    def get_count_of_word(self, word: str) -> int:
         print('There is a total of {} occurrences for the word {}.'.format(occurrences := self.data[word][0], word))
         return occurrences
 
-    # return all Strong's values
-    def get_strongs(self, word: str):
-        return self.data[word][1]
-
     # count total number of a specific Strong's given a word
-    def get_total_strongs(self, word: str) -> int:
+    def get_strongs_count_for_word(self, word: str) -> int:
         count = 0
         for k in self.data[word][1].keys():
             count += self.data[word][1][k]
         return count
 
     # iterates through dictionary to count and returns the occurrences of each Strong's given any word
-    def get_strongs_occ_per_word(self, word: str) -> []:
-        return [(k, v) for k, v in self.data[[word][1]]]
+    def get_word_strongs_tuple_for(self, word: str) -> tuple:
+        return tuple((word, [k for k in self.data[word][1].keys()]))
