@@ -9,6 +9,7 @@ class BibleDictionary(UserDict):
     def bible_to_dict(self, bible_lst: []) -> {}:
         pass
 
+    # removes Strong's from a word and returns the word and Strong's
     def remove_strongs(self, word: str) -> (str, str):
         strongs = ''
         if '{' in word:

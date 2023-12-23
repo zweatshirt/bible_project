@@ -1,4 +1,6 @@
 from bible_to_structs.bible_dict_parent import *
+
+
 # from bible_to_structs.helpers import remove_strongs, get_keys
 
 
@@ -77,7 +79,6 @@ class DictOne(BibleDictionary):
                             bible_dict[book][chapter][verse_num] = verse
 
         return bible_dict
-
 
     # def __repr__(self):
     #     pp = PrettyPrinter(depth=4)
