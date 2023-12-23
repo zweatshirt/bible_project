@@ -13,7 +13,7 @@ class DictTwo(BibleDictionary):
 
         for word in bible_lst:
             # case only if strong's concordance
-            word, strongs = self.remove_strongs(word)
+            word, strongs = self.separate_strongs(word)
 
             # don't want to add chapter and verse numbers
             if word.isdigit() is False:

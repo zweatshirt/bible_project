@@ -11,7 +11,7 @@ class BibleDictionary(UserDict):
 
     # removes Strong's from a word and returns the word and Strong's
     @staticmethod
-    def remove_strongs(word: str) -> (str, str):
+    def separate_strongs(word: str) -> (str, str):
         strongs = ''
         if '{' in word:
             strongs = tuple(findall('\{.*?\}', word))

@@ -10,18 +10,20 @@ class DictOne(BibleDictionary):
         super().__init__()
         self.data = self.bible_to_dict(bible_lst)
 
+    def add_word_to_verse(self, word, verse):
+        pass
+
     def bible_to_dict(self, bible_lst: []):
         bible_dict = {}
         book = None
         chapter = None
         verse_num = None
         verse = []
-
-        len_words = len(bible_lst)
+        length = len(bible_lst)
 
         for i, word in enumerate(bible_lst):
 
-            word, strongs = self.remove_strongs(word)
+            word, strongs = self.separate_strongs(word)
 
             if (word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit():
 
@@ -49,8 +51,8 @@ class DictOne(BibleDictionary):
                     bible_dict[book][chapter] = {}
 
             # final word of bible case
-            if i == len_words - 1:
-                verse.append(word)
+            if i == length - 1:
+                verse.append((word, strongs))
                 break
 
             # look at anything that isn't a chapter, psalm, or book title
@@ -64,21 +66,22 @@ class DictOne(BibleDictionary):
                             verse_num = int(word)
                             # reset verse list for every new verse num
                             verse = []
+
                         else:
                             # add word to verse list
-                            verse.append(word)
+                            verse.append((word, strongs))
 
                         # get rid of occurrences where book names end up at end of verse
                         if i < len(bible_lst) - 2 and (bible_lst[i + 1] + " " + bible_lst[i + 2] == 'chapter 1' or
                                                        bible_lst[i + 1] + " " + bible_lst[i + 2] == 'psalm 1'):
                             verse.pop()
 
-                        # add verse to to the bible dictionary
+                        # add verse to the bible dictionary
                         if verse_num not in bible_dict[book][chapter]:
                             bible_dict[book][chapter][verse_num] = verse
 
         return bible_dict
 
-    # def __repr__(self):
-    #     pp = PrettyPrinter(depth=4)
-    #     pp.pprint(self.dict)
+    @staticmethod
+    def pprint_verse(self, verse: []):
+        [print(word[0]) for word in verse]

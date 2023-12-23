@@ -21,9 +21,25 @@ if __name__ == '__main__':
 
     print(b_two.get_word_strongs_tuple_for('god'))
 
-    print(last := b['revelation'][22][21][-1])
-    print(b_two.get_word_strongs_tuple_for(last))
+    print(last := b['revelation'][22][21])
+
+    # fix
+    # print(b_two.get_word_strongs_tuple_for(last))
+
+
     # List of JSON of as many words in the bible as possible with definitions
     f_name = '/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json'
+
+    # def find_paths(nested_dict, value, prepath=()):
+    #     for k, v in nested_dict.items():
+    #         path = prepath + (k,)
+    #         if v == value: # found value
+    #             yield path
+    #         elif hasattr(v, 'items'): # v is a dict
+    #             yield from find_paths(v, value, path)
+    #
+    # print(*find_paths(dictionary, 'image/svg+xml'))
+    b.pprint_verse(last)
+
     dictionary_json = read_json_file(f_name)
 
