@@ -5,8 +5,7 @@
 from file_reading.bible_reading import *
 from bible_to_structs.bible_dict_one import DictOne
 from bible_to_structs.bible_dict_two import DictTwo
-from file_reading.vocab_dictionary import write_api_data
-
+from file_reading.vocab_dictionary import append_api_data, read_json_file
 
 if __name__ == '__main__':
     bible = read_bible('kjv_strongs.txt')
@@ -17,14 +16,24 @@ if __name__ == '__main__':
     # print(len(bible_dct.dict['zephaniah'][3][21]))
     b_two = DictTwo(cleaned_words)
 
-    # write_api_data('/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json', b_two)
 
-# reads  the processed comments from comments.txt and returns them in a list
-
-
-# writes the comments and sentiment of the comments to a new file.
+    json_dct = read_json_file('/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json')
 
 
-# lst = [get('https://api.dictionaryapi.dev/api/v2/entries/en/' + i) for i in b_two.dict.keys()]
+    # go through b_two to check if the word is in json_dct
+    # if not try to use API for it again
 
-# print(lst)
+    # lst = [i[0]['word'] for i in json_dct]
+    # lst2 = []
+    # for key in b_two.keys():
+    #     if key not in lst:
+    #         lst2.append(key)
+    lst2 = []
+    print(lst2)
+    with open('/Users/zachjlinscott/PycharmProjects/bible_parser/additional_words_not_in_dictionary', 'r', encoding='utf-8') as f:
+        for line in f:
+            lst2.append(line.replace('\n', ''))
+
+    append_api_data('/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary', lst2)
+
+
