@@ -50,7 +50,6 @@ class DictOne(BibleDictionary):
 
             # final word of bible case
             if i == len_words - 1:
-                word, strongs = self.remove_strongs(word)
                 verse.append(word)
                 break
 
