@@ -2,7 +2,7 @@ from json import loads
 import requests
 from time import sleep
 
-from bible_to_structs.bible_dict_two import DictTwo
+from bible_to_dicts.dict_two import DictTwo
 
 
 def get_api_data(word: str, sleep_time, sleep_count=0) -> str:  # returns JSON
@@ -35,8 +35,4 @@ def read_json_file(file_name) -> []:
     json_data = []
 
     with open(file_name, 'r') as f:
-        for line in f:
-            if line.strip():
-                json_data.append(loads(line))
-
-    return json_data
+        return [loads(line) for line in f if line.strip()]

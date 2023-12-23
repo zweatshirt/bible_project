@@ -1,4 +1,4 @@
-from bible_to_structs.bible_dict_parent import *
+from bible_to_dicts.bible_dictionary import *
 
 
 class DictTwo(BibleDictionary):
