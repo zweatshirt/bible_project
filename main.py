@@ -22,13 +22,12 @@ if __name__ == '__main__':
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_words)
-    print(b['revelation'][22])
+    print(b['genesis'][1])
     # word -> [word occurrence count, {Strong's: Strong's occurrence count}]
     # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
 
-    print(b['genesis'][50])
-    print(b.num_chapters(book := b['revelation']))
+    # print(b.num_chapters(book := b['revelation']))
 
     # print(b_two)
 

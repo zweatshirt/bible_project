@@ -34,7 +34,7 @@ class DictOne(BibleDictionary):
 
             if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
                 # reset verse for every new chapter
-                verse = []
+                # verse = []
                 chapter = int(b_lst[i + 1])
                 # if chapter name is 1, we can grab the book name one index behind
                 if chapter == 1:
@@ -56,6 +56,7 @@ class DictOne(BibleDictionary):
                     verse = []
                 else:
                     verse.append((word, strongs))
+                # verse_num = self.add_word_to_verse(verse, word, strongs)
 
                 # get rid of occurrences where book names end up at end of verse
                 if self._b_name_at_end(b_lst, i):
@@ -76,8 +77,17 @@ class DictOne(BibleDictionary):
             bible_dict[book][chapter] = {}
 
     def _add_verse_to_dict(self, bible_dict, book, chapter, verse_num, verse):
-        if verse_num not in bible_dict[book][chapter]:
+        if verse_num and verse_num not in bible_dict[book][chapter]:
             bible_dict[book][chapter][verse_num] = verse
+
+    # no idea why this doesn't work
+    def add_word_to_verse(self, verse, word, strongs):
+        if word.isdigit():
+            # reset verse list for every new verse num
+            verse[:] = []
+            return int(word)
+
+        verse.append((word, strongs))
 
     # in the event that the next book name  is appended to
     # the end of the last chapter and verse of the current book.
