@@ -84,10 +84,12 @@ class DictOne(BibleDictionary):
         return bible_dict
 
     @staticmethod
-    def pprint_verse(verse: []):
-        print(clean := ' '.join([word[0] for word in verse]))
-        return clean
+    def clean_verse(verse: []):
+        return ' '.join([word[0] for word in verse])
 
+    @staticmethod
+    def pprint_verse(verse: []):
+        print(DictOne.clean_verse(verse))
 
     # write
     def pprint_chapter(self, chapter: {}):
