@@ -30,7 +30,7 @@ class DictOne(BibleDictionary):
         verse = []
 
         for i, word in enumerate(b_lst):
-            word, strongs = DictOne.separate_strongs(word)
+            word, strongs = self.separate_strongs(word)
 
             if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
                 # reset verse for every new chapter
@@ -46,7 +46,7 @@ class DictOne(BibleDictionary):
             # final word of bible case
             if i == len(b_lst) - 1:
                 verse.append((word, strongs))
-                break
+                return bible_dict
 
             # look at any word that isn't a chapter, psalm, or book title
             if not self.__ch_or_book(b_lst, i, book, word):
