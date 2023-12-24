@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_words)
-
+    print(b['revelation'][22])
     # word -> [word occurrence count, {Strong's: Strong's occurrence count}]
     # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     print(b['genesis'][50])
     print(b.num_chapters(book := b['revelation']))
 
-    print(b_two)
+    # print(b_two)
 
     # fix
     # print(b_two.get_word_strongs_tuple_for(last))
