@@ -67,9 +67,6 @@ class DictOne(BibleDictionary):
 
     ''' helper methods for bible_to_dict() '''
 
-    # in the event that the next book name
-    # is appended to the end of the last chapter
-    # and verse of the current book
     def _add_book_to_dict(self, bible_dict, book):
         if book and book not in bible_dict:
             bible_dict[book] = {}
@@ -82,6 +79,9 @@ class DictOne(BibleDictionary):
         if verse_num not in bible_dict[book][chapter]:
             bible_dict[book][chapter][verse_num] = verse
 
+    # in the event that the next book name  is appended to
+    # the end of the last chapter and verse of the current book.
+    # probably a better solution but...
     def _b_name_at_end(self, bible_lst, i):
         if not i < len(bible_lst) - 2:
             return False
