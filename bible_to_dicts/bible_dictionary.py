@@ -26,6 +26,8 @@ class BibleDictionary(UserDict):
             else:
                 yield key, value
 
-    # return a list of the base dictionary keys only
     def get_key_list(self):
         return [key for key in self.data.keys()]
+
+    def get_value_list(self):
+        return [val for val in self.data.values()]
