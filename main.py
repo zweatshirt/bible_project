@@ -36,6 +36,8 @@ if __name__ == '__main__':
     print(b['genesis'][50])
     print(b.num_chapters(book := b['revelation']))
 
+    print(b_two)
+
     # fix
     # print(b_two.get_word_strongs_tuple_for(last))
 
