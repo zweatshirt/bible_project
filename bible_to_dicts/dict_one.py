@@ -1,7 +1,4 @@
-from bible_to_dicts.bible_dictionary import *
-
-
-# from bible_to_dicts.helpers import remove_strongs, get_keys
+from bible_to_dicts.bible_dictionary import BibleDictionary
 
 
 # bible -> book -> chapter -> verse -> words
@@ -33,7 +30,7 @@ class DictOne(BibleDictionary):
         verse = []
 
         for i, word in enumerate(b_lst):
-            word, strongs = self.separate_strongs(word)
+            word, strongs = DictOne.separate_strongs(word)
 
             if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
                 # reset verse for every new chapter
@@ -77,11 +74,9 @@ class DictOne(BibleDictionary):
         if book and book not in bible_dict:
             bible_dict[book] = {}
 
-
     def __add_ch_to_dict(self, bible_dict, book, chapter):
         if book and chapter and chapter not in bible_dict[book]:
             bible_dict[book][chapter] = {}
-
 
     def __add_verse_to_dict(self, bible_dict, book, chapter, verse_num, verse):
         if verse_num not in bible_dict[book][chapter]:

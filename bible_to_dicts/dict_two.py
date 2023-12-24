@@ -1,4 +1,4 @@
-from bible_to_dicts.bible_dictionary import *
+from bible_to_dicts.bible_dictionary import BibleDictionary
 
 
 class DictTwo(BibleDictionary):
