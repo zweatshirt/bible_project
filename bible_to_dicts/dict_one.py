@@ -83,11 +83,11 @@ class DictOne(BibleDictionary):
             bible_dict[book][chapter][verse_num] = verse
 
     def _b_name_at_end(self, bible_lst, i):
-        if i < len(bible_lst) - 2:
-            if (bible_lst[i + 1] + " " + bible_lst[i + 2] == 'chapter 1' or
-                    bible_lst[i + 1] + " " + bible_lst[i + 2] == 'psalm 1'):
-                return True
-        return False
-
+        if not i < len(bible_lst) - 2:
+            return False
+        if not (bible_lst[i + 1] + " " + bible_lst[i + 2] == 'chapter 1' or
+                bible_lst[i + 1] + " " + bible_lst[i + 2] == 'psalm 1'):
+            return False
+        return True
 
     '''end'''
