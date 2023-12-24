@@ -58,7 +58,7 @@ class DictOne(BibleDictionary):
             # look at anything that isn't a chapter, psalm, or book title
             if i != 0 and bible_lst[i - 1] != book:
 
-                if not ((bible_lst[i - 1] == 'chapter' or bible_lst[i - 1] == 'psalm') and bible_lst[i].isdigit()):
+                if not ((bible_lst[i - 1] == 'chapter' or bible_lst[i - 1] == 'psalm') and word.isdigit()):
                     if not ((word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit()):
 
                         # if word is a verse num
@@ -79,9 +79,21 @@ class DictOne(BibleDictionary):
                         # add verse to the bible dictionary
                         if verse_num not in bible_dict[book][chapter]:
                             bible_dict[book][chapter][verse_num] = verse
+                            # bible_dict[book][chapter][verse_num] = verse
 
         return bible_dict
 
     @staticmethod
-    def pprint_verse(self, verse: []):
-        [print(word[0]) for word in verse]
+    def pprint_verse(verse: []):
+        print(clean := ' '.join([word[0] for word in verse]))
+        return clean
+
+
+    # write
+    def pprint_chapter(self, chapter: {}):
+        for key in self.yield_all_keys(chapter):
+            pass
+
+    @staticmethod
+    def num_chapters(dct: {}):
+        return len(dct)

@@ -19,8 +19,8 @@ class BibleDictionary(UserDict):
         return word, strongs
 
     # recursive function to get every single key in a nested dictionary
-    def yield_all_keys(self):
-        for key, value in self.data.items():
+    def yield_all_keys(self, d: {}):
+        for key, value in d.items():
             if type(value) is dict:
                 yield from self.yield_all_keys(value)
             else:

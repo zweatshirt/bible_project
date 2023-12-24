@@ -19,13 +19,14 @@ if __name__ == '__main__':
     # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
 
-    print(b_two.get_word_strongs_tuple_for('god'))
+    b.pprint_verse(b['revelation'][22][21])
+    print(b.num_chapters(book := b['revelation']))
 
-    print(last := b['revelation'][22][21])
+    # fix
+    # b.pprint_chapter(b['revelation'][22])
 
     # fix
     # print(b_two.get_word_strongs_tuple_for(last))
-
 
     # List of JSON of as many words in the bible as possible with definitions
     f_name = '/Users/zachjlinscott/PycharmProjects/bible_parser/dictionary.json'
@@ -39,7 +40,5 @@ if __name__ == '__main__':
     #             yield from find_paths(v, value, path)
     #
     # print(*find_paths(dictionary, 'image/svg+xml'))
-    b.pprint_verse(last)
 
     dictionary_json = read_json_file(f_name)
-
