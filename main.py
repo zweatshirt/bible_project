@@ -19,11 +19,9 @@ if __name__ == '__main__':
     # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
 
-    b.pprint_verse(b['revelation'][22][21])
+    print(b['genesis'][50])
     print(b.num_chapters(book := b['revelation']))
 
-    # fix
-    # b.pprint_chapter(b['revelation'][22])
 
     # fix
     # print(b_two.get_word_strongs_tuple_for(last))

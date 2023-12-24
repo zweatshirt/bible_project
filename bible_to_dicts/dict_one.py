@@ -10,43 +10,27 @@ class DictOne(BibleDictionary):
         super().__init__()
         self.data = self.bible_to_dict(bible_lst)
 
-    def add_word_to_verse(self, word, verse):
-        pass
-
     def bible_to_dict(self, bible_lst: []):
         bible_dict = {}
-        book = None
-        chapter = None
-        verse_num = None
+        book, chapter, verse_num = None, None, None
         verse = []
         length = len(bible_lst)
 
         for i, word in enumerate(bible_lst):
-
             word, strongs = self.separate_strongs(word)
 
             if (word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit():
-
                 # reset verse for every new chapter
                 verse = []
-
-                # get chapter name
                 chapter = int(bible_lst[i + 1])
 
                 # if chapter name is 1, we can grab the book name one index behind
                 if chapter == 1:
-
-                    # get book name
-                    if bible_lst[i - 2].isdigit():  # in cases where the book name starts with a num e.g. 1 Samuel
-                        book = bible_lst[i - 2] + " " + bible_lst[i - 1]
-                    else:
-                        book = bible_lst[i - 1]
-
+                    book = self.__book_name_helper(bible_lst, i)
                     # add book to bible_dict
                     if book and book not in bible_dict:
                         bible_dict[book] = {}
 
-                # add chapter to bible_dict[book]
                 if book and chapter and chapter not in bible_dict[book]:
                     bible_dict[book][chapter] = {}
 
@@ -56,32 +40,51 @@ class DictOne(BibleDictionary):
                 break
 
             # look at anything that isn't a chapter, psalm, or book title
-            if i != 0 and bible_lst[i - 1] != book:
+            if self.__not_chap_psalm_or_book(bible_lst, i, book, word):
+                if word.isdigit():
+                    verse_num = int(word)
+                    # reset verse list for every new verse num
+                    verse = []
+                else:
+                    verse.append((word, strongs))
 
-                if not ((bible_lst[i - 1] == 'chapter' or bible_lst[i - 1] == 'psalm') and word.isdigit()):
-                    if not ((word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit()):
+                # get rid of occurrences where book names end up at end of verse
+                if self.__b_name_at_end(bible_lst, i):
+                    verse.pop()
 
-                        # if word is a verse num
-                        if word.isdigit():
-                            verse_num = int(word)
-                            # reset verse list for every new verse num
-                            verse = []
-
-                        else:
-                            # add word to verse list
-                            verse.append((word, strongs))
-
-                        # get rid of occurrences where book names end up at end of verse
-                        if i < len(bible_lst) - 2 and (bible_lst[i + 1] + " " + bible_lst[i + 2] == 'chapter 1' or
-                                                       bible_lst[i + 1] + " " + bible_lst[i + 2] == 'psalm 1'):
-                            verse.pop()
-
-                        # add verse to the bible dictionary
-                        if verse_num not in bible_dict[book][chapter]:
-                            bible_dict[book][chapter][verse_num] = verse
-                            # bible_dict[book][chapter][verse_num] = verse
+                if verse_num not in bible_dict[book][chapter]:
+                    bible_dict[book][chapter][verse_num] = verse
+                    # bible_dict[book][chapter][verse_num] = verse
 
         return bible_dict
+
+    ''' helper methods for bible_to_dict() '''
+
+    # in the event that the next book name
+    # is appended to the end of the last chapter
+    # and verse of the current book
+    def __b_name_at_end(self, bible_lst, i):
+        if i < len(bible_lst) - 2:
+            if (bible_lst[i + 1] + " " + bible_lst[i + 2] == 'chapter 1' or
+                    bible_lst[i + 1] + " " + bible_lst[i + 2] == 'psalm 1'):
+                return True
+        return False
+
+    def __not_chap_psalm_or_book(self, bible_lst, i, book, word):
+        if i != 0 and bible_lst[i - 1] != book:
+            if not ((bible_lst[i - 1] == 'chapter' or bible_lst[i - 1] == 'psalm') and word.isdigit()):
+                if not ((word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit()):
+                    return True
+        return False
+
+    # grabs book name
+    def __book_name_helper(self, bible_lst, i):
+        if bible_lst[i - 2].isdigit():  # in cases where the book name starts with a num e.g. 1 Samuel
+            return bible_lst[i - 2] + " " + bible_lst[i - 1]
+        else:
+            return bible_lst[i - 1]
+
+    '''end'''
 
     @staticmethod
     def clean_verse(verse: []):
