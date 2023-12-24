@@ -8,15 +8,28 @@ class DictTwo(BibleDictionary):
 
     # dictionary where words in the KJV bible are key, the value is a list of the occurrence of the word and a nested dictionary
     # of all the Strong's for that given word.
-    def bible_to_dict(self, bible_lst: []):
+    def bible_to_dict(self, b_lst: []):
         words_dict = {}
+        book = chapter = ''
+        verse_num = 0
 
-        for word in bible_lst:
+        for i, word in enumerate(b_lst):
             # case only if strong's concordance
             word, strongs = self.separate_strongs(word)
 
+            if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
+                # reset verse for every new chapter
+                chapter = int(b_lst[i + 1])
+                # if chapter name is 1, we can grab the book name one index behind
+                if chapter == 1:
+                    book = self._book_name_helper(b_lst, i)
+
+            if not self._is_ch_or_book(b_lst, i, book, word):
+                if word.isdigit():
+                    verse_num = int(word)
+
             # don't want to add chapter and verse numbers
-            if word.isdigit() is False:
+            if not word.isdigit():
                 # add word and count if word already in dict
                 if word not in words_dict:
                     words_dict[word] = [1, {}]
@@ -28,9 +41,12 @@ class DictTwo(BibleDictionary):
                 if strongs:
                     for s in strongs:
                         if s not in words_dict[word][1]:
-                            words_dict[word][1][s] = 1
+                            words_dict[word][1][s] = [1, []]
                         elif s in words_dict[word][1]:
-                            words_dict[word][1][s] += 1
+                            words_dict[word][1][s][0] += 1
+                        if book and chapter and verse_num:
+                            words_dict[word][1][s][1].append([book, chapter, verse_num])
+
 
         return words_dict
 
@@ -49,3 +65,5 @@ class DictTwo(BibleDictionary):
     # iterates through dictionary to count and returns the occurrences of each Strong's given any word
     def get_word_strongs_tuple_for(self, word: str) -> tuple:
         return tuple((word, [k for k in self.data[word][1].keys()]))
+
+
