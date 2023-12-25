@@ -33,7 +33,9 @@ An NLP libray needs to be implemented for phrase searching still.
 
 The front end work that needs to be finished, is well, the entire actual application.
 
-I'd like to give a special thanks to 
-[meetDeveloper](https://github.com/meetDeveloper?tab=repositories), 
+### Special thanks to:
+1. Jesus for saving me and motivating me daily to put forth light and love into the world
+despite what I have been through.
+2. [meetDeveloper](https://github.com/meetDeveloper?tab=repositories), 
 the creator of [Free Dictionary API](https://dictionaryapi.dev). 
 This is an excellent API for getting word definitions for free.
