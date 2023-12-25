@@ -6,9 +6,13 @@ import os, psutil
 
 
 def process_mem_size(p: psutil.Process()):
-    print('Memory usage in bytes: {}'.format(mem_bytes := p.memory_info().rss))
-    print('Memory usage in MB: {}'.format(megabytes := mem_bytes / (1000 ** 2)))
-    print('Memory usage in GB: {}'.format(gigabytes := megabytes / 1000))
+    print(
+        '* Memory usage of process ' + str(p.pid) +
+        ' *\n\tbytes: {}\n\tMB: {}\n\tGB: {}'
+        .format(mem_bytes := p.memory_info().rss,
+                megabytes := mem_bytes / (1000 ** 2),
+                gigabytes := megabytes / 1000)
+    )
 
 
 if __name__ == '__main__':
