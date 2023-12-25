@@ -3,7 +3,7 @@
 ### Under GitHub's 'No Licence' Policy:
 
 **All rights are retained to this source code by the author zweatshirt (Zachery Linscott).  
-No one may reproduce, distribute, or create derivative works from this repository**
+No one may reproduce, distribute, or create derivative works from this repository.**
 
 For questions about potentially collaborating feel free to message me at zach7307@gmail.com
 
