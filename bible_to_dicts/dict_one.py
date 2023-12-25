@@ -84,7 +84,7 @@ class DictOne(BibleDictionary):
     def add_word_to_verse(self, verse, word, strongs):
         if word.isdigit():
             # reset verse list for every new verse num
-            verse[:] = []
+            del verse[:]
             return int(word)
 
         verse.append((word, strongs))

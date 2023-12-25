@@ -14,8 +14,7 @@ def process_mem_size(p: psutil.Process()):
                 gigabytes := megabytes / 1000)
     )
 
-
-if __name__ == '__main__':
+def main():
     # read the bible and store as string
     bible = read_bible('data_files/kjv_strongs.txt')
 
@@ -27,16 +26,13 @@ if __name__ == '__main__':
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_words)
     print(b['genesis'][1])
+    
     # word -> [word occurrence count, {Strong's: Strong's occurrence count}]
     # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
     print(b_two['apprehend'])
+    
     # print(b.num_chapters(book := b['revelation']))
-
-    # print(b_two)
-
-    # fix
-    # print(b_two.get_word_strongs_tuple_for(last))
 
     # List of JSON of as many words in the bible as possible with definitions
     f_name = 'data_files/dictionary.json'
@@ -44,6 +40,9 @@ if __name__ == '__main__':
 
     process = psutil.Process()
     process_mem_size(process)
+
+if __name__ == '__main__':
+    main()
 
 # with vocab dictionary, create Strong's Concordance to map to verses
 # not working, I'm not sure why
