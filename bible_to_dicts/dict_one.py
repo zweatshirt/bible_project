@@ -100,4 +100,4 @@ class DictOne(BibleDictionary):
             return False
         return True
 
-    '''end'''
+    '''end helper methods for bible_to_dict()'''
