@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # word -> [word occurrence count, {Strong's: Strong's occurrence count}]
     # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_words)
-
+    print(b_two['apprehend'])
     # print(b.num_chapters(book := b['revelation']))
 
     # print(b_two)
@@ -40,7 +40,6 @@ if __name__ == '__main__':
 
     process = psutil.Process()
     process_mem_size(process)
-
 
 # with vocab dictionary, create Strong's Concordance to map to verses
 # not working, I'm not sure why
