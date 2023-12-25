@@ -50,7 +50,6 @@ class DictTwo(BibleDictionary):
                         words_dict[word][1][s][0] += 1
                     if book and chapter and verse_num:
                         words_dict[word][1][s][1].append([book, chapter, verse_num])
-
     '''end helper method(s) for bible_to_dict()'''
 
     # returns word occurrence count given a word
