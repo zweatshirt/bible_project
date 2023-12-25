@@ -33,7 +33,7 @@ class DictTwo(BibleDictionary):
 
         return words_dict
 
-    '''helper method(s) for biblle_to_dict('''
+    '''helper method(s) for biblle_to_dict()'''
     def _add_to_dict(self, words_dict, word, strongs, book, chapter, verse_num):
         if not word.isdigit():
             # add word and count if word already in dict
@@ -51,7 +51,7 @@ class DictTwo(BibleDictionary):
                     if book and chapter and verse_num:
                         words_dict[word][1][s][1].append([book, chapter, verse_num])
 
-    '''end helper method(s) for bible_to_dict'''
+    '''end helper method(s) for bible_to_dict()'''
 
     # returns word occurrence count given a word
     def get_count_of_word(self, word: str) -> int:
