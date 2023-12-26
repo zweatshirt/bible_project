@@ -26,14 +26,14 @@ Much of the backend work is done.
 Everything is put cleanly into data structures (mostly nested dicts) and a JSON file.
 
 
-### Work to be finished:
+## Work to be finished:
 The backend work that needs to be finished is using the pickle library
 to serialize data to save space and allow for faster querying than JSON.
 An NLP library needs to be implemented for phrase searching still.
 
 The front end work that needs to be finished, is well, the entire actual application.
 
-### Special thanks to:
+## Special thanks to:
 1. Jesus for saving me and motivating me daily to put forth light and love into the world.
 2. [meetDeveloper](https://github.com/meetDeveloper?tab=repositories), 
 the creator of [Free Dictionary API](https://dictionaryapi.dev). 
