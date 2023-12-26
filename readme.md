@@ -29,7 +29,7 @@ Everything is put cleanly into data structures (mostly nested dicts) and a JSON 
 ### Work to be finished:
 The backend work that needs to be finished is using the pickle library
 to serialize data to save space and allow for faster querying than JSON.
-An NLP libray needs to be implemented for phrase searching still.
+An NLP library needs to be implemented for phrase searching still.
 
 The front end work that needs to be finished, is well, the entire actual application.
 
