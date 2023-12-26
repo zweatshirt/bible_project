@@ -7,6 +7,6 @@ def mem_size(p: psutil.Process()):
         '* Memory usage of process ' + str(p.pid) +
         ' *\n\tBytes: {}\n\tMB: {}\n\tGB: {}'
         .format(mem_bytes := p.memory_info().rss,
-                megabytes := mem_bytes / (1000 ** 2),
-                gigabytes := megabytes / 1000)
+                megabytes := mem_bytes / (2 ** 20),
+                gigabytes := megabytes / (2 ** 30)
     )
