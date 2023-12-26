@@ -2,6 +2,8 @@ from bible_f_reading.bible_reading import *
 from bible_to_dicts.dict_one import DictOne
 from mem_mgmt.mem_mgmt import *
 from bible_app.defn_api_handling.defn_api_handling import *
+import kivy  # will implement eventually
+import pickle  #  will implement eventually
 
 
 def main():
