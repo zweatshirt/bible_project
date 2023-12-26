@@ -8,5 +8,5 @@ def mem_size(p: psutil.Process()):
         ' *\n\tBytes: {}\n\tMB: {}\n\tGB: {}'
         .format(mem_bytes := p.memory_info().rss,
                 megabytes := mem_bytes / (2 ** 20),
-                gigabytes := megabytes / (2 ** 30)
+                gigabytes := mem_bytes / (2 ** 30)
     )
