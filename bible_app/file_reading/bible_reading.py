@@ -1,6 +1,6 @@
 import string
 
-BIBLE_FILE = 'data_files/kjv_strongs.txt'
+BIBLE_FILE = 'bible_app/data_files/kjv_strongs.txt'
 
 
 def read_bible(f_name: str) -> str:

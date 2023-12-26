@@ -1,7 +1,7 @@
 from json import loads
 import requests
 from time import sleep
-from bible_to_dicts.dict_two import DictTwo
+from bible_app.bible_to_dicts.dict_two import DictTwo
 
 """
 TODO:
@@ -9,8 +9,8 @@ TODO:
 """
 
 DICTIONARY_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
-DEFINITIONS_JSON_FILE = 'data_files/dictionary.json'
-LEFTOVER_WORDS_FILE = 'data_files/unreadable_by_api'  # words API could not get definitions for
+DEFINITIONS_JSON_FILE = 'bible_app/data_files/dictionary.json'
+LEFTOVER_WORDS_FILE = 'bible_app/data_files/unreadable_by_api'  # words API could not get definitions for
 
 
 def append_api_data(d: DictTwo or []):
