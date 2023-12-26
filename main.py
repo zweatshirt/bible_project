@@ -1,33 +1,30 @@
+import file_reading.defn_api_handling
 from file_reading.bible_reading import *
 from bible_to_dicts.dict_one import DictOne
 from bible_to_dicts.dict_two import DictTwo
 from mem_mgmt.mem_mgmt import *
-from file_reading.vocab_dictionary import append_api_data, read_json_file
+from file_reading.defn_api_handling import *
 
 
 def main():
-    # read the bible and store as string
-    bible = read_bible('data_files/kjv_strongs.txt')
 
-    # list of each word in the bible
-    # lower cased and rid of punctuation
-    cleaned_words = clean_bible(bible)  # needs work
+    bible = read_bible(BIBLE_FILE)
+
+    # bible lower cased and stripped of most punctuation
+    cleaned_bible: [] = clean_bible(bible)  # needs work
 
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
-    b = DictOne(cleaned_words)
+    b = DictOne(cleaned_bible)
     print(b['revelation'][22])
 
     # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
     # {str: [int, {str: int}]}
-    b_two = DictTwo(cleaned_words)
+    b_two = DictTwo(cleaned_bible)
     print(b_two['word'])
 
-    # print(b.num_chapters(book := b['revelation']))
-
     # List of JSON of as many words in the bible as possible with definitions
-    f_name = 'data_files/dictionary.json'
-    dictionary_json = read_json_file(f_name)
+    dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
 
     process = psutil.Process()
     mem_size(process)

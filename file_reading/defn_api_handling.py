@@ -8,13 +8,14 @@ TODO:
     The functions in this file have been modified but need to be properly tested.
 """
 
-
 DICTIONARY_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
+DEFINITIONS_JSON_FILE = 'data_files/dictionary.json'
+LEFTOVER_WORDS_FILE = 'data_files/unreadable_by_api'  # words API could not get definitions for
 
 
-def append_api_data(file_name: str, d: DictTwo or []):
+def append_api_data(d: DictTwo or []):
     """gets API data in the form of a json object and appends it to a .json file"""
-    with open(file_name, 'a', encoding='utf-8') as f:
+    with open(DEFINITIONS_JSON_FILE, 'a', encoding='utf-8') as f:
         for k in d:
             json_data = get_api_data(k, 60)
             if json_data:
@@ -43,8 +44,7 @@ def no_definition_for(word: str):
     if there are no definitions for a word we want to save the word for later attempts.
     should probably be rewritten so it doesn't open the file every time an append is needed.
     """
-
-    f_append('data_files/unreadable_by_api', word)
+    f_append(LEFTOVER_WORDS_FILE, word)
     return None
 
 
@@ -55,7 +55,7 @@ def f_append(f_name, vals):
             f.write(v)
 
 
-def read_json_file(file_name) -> []:
+def read_def_json_f(f_name) -> []:
     """returns list of all json objs from a file"""
-    with open(file_name, 'r') as f:
+    with open(f_name, 'r') as f:
         return [loads(line) for line in f if line.strip()]
