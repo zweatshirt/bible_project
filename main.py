@@ -1,18 +1,8 @@
 from file_reading.bible_reading import *
 from bible_to_dicts.dict_one import DictOne
 from bible_to_dicts.dict_two import DictTwo
+from mem_mgmt.mem_mgmt import *
 from file_reading.vocab_dictionary import append_api_data, read_json_file
-import os, psutil
-
-
-def process_mem_size(p: psutil.Process()):
-    print(
-        '* Memory usage of process ' + str(p.pid) +
-        ' *\n\tbytes: {}\n\tMB: {}\n\tGB: {}'
-        .format(mem_bytes := p.memory_info().rss,
-                megabytes := mem_bytes / (1000 ** 2),
-                gigabytes := megabytes / 1000)
-    )
 
 
 def main():
@@ -40,7 +30,7 @@ def main():
     dictionary_json = read_json_file(f_name)
 
     process = psutil.Process()
-    process_mem_size(process)
+    mem_size(process)
 
 
 if __name__ == '__main__':

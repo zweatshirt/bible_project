@@ -8,7 +8,8 @@ def read_bible(f_name: str) -> str:
 
 
 def clean_bible(bible: str) -> []:
-    replace_str = string.punctuation.replace('{', '').replace('}', '')\
+    replace_str = string.punctuation.replace('{', '')\
+        .replace('}', '')\
         .replace('-', '')
     # return bible.translate(str.maketrans('', '', replace_str)).lower().split()
     return bible.translate(str.maketrans('', '', replace_str)).lower().split()
