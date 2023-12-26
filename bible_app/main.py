@@ -1,12 +1,11 @@
-import file_reading.defn_api_handling
-from file_reading.bible_reading import *
+from bible_f_reading.bible_reading import *
 from bible_to_dicts.dict_one import DictOne
-from bible_to_dicts.dict_two import DictTwo
 from mem_mgmt.mem_mgmt import *
-from file_reading.defn_api_handling import *
+from bible_app.defn_api_handling.defn_api_handling import *
 
 
 def main():
+
     bible = read_bible(BIBLE_FILE)
 
     # bible lower cased and stripped of most punctuation
