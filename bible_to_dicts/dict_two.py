@@ -6,36 +6,32 @@ class DictTwo(BibleDictionary):
         super().__init__()
         self.data = self.bible_to_dict(bible_lst)
 
-    # dictionary where words in the KJV bible are key, the value is a list of the occurrence of the word and a nested dictionary
-    # of all the Strong's for that given word.
     def bible_to_dict(self, b_lst: []):
+        """returns nested dict of all words in the bible."""
         words_dict = {}
         book = chapter = ''
         verse_num = 0
 
         for i, word in enumerate(b_lst):
-            # case only if strong's concordance
             word, strongs = self.separate_strongs(word)
 
             if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
-                # reset verse for every new chapter
                 chapter = int(b_lst[i + 1])
-                # if chapter name is 1, we can grab the book name one index behind
+
                 if chapter == 1:
-                    book = self._book_name_helper(b_lst, i)
+                    book = self._book_name_helper(b_lst, i)  # grab book ame
 
             if not self._is_ch_or_book(b_lst, i, book, word):
                 if word.isdigit():
-                    verse_num = int(word)
+                    verse_num = int(word)  # grab verse num
 
             self._add_to_dict(words_dict, word, strongs, book, chapter, verse_num)
 
         return words_dict
 
-    '''helper method(s) for biblle_to_dict()'''
     def _add_to_dict(self, words_dict, word, strongs, book, chapter, verse_num):
+        """helper method for bible_to_dict(). Adds all the keys and values to the dict"""
         if not word.isdigit():
-            # add word and count if word already in dict
             if word not in words_dict:
                 words_dict[word] = [1, {}]
             else:
@@ -49,20 +45,19 @@ class DictTwo(BibleDictionary):
                         words_dict[word][1][s][0] += 1
                     if book and chapter and verse_num:
                         words_dict[word][1][s][1].append([book, chapter, verse_num])
-    '''end helper method(s) for bible_to_dict()'''
 
-    '''returns word occurrence count given a word'''
     def get_count_of_word(self, word: str) -> int:
+        """returns word occurrence count given a word"""
         print('There is a total of {} occurrences for the word {}.'.format(occurrences := self.data[word][0], word))
         return occurrences
 
-    # count total number of a specific Strong's given a word
     def get_strongs_count_for_word(self, word: str) -> int:
+        """returns the count of all Strong's vals occurrences for a given word"""
         count = 0
         for k in self.data[word][1].keys():
             count += self.data[word][1][k]
         return count
 
-    # iterates through dictionary to count and returns the occurrences of each Strong's given any word
     def get_word_strongs_tuple_for(self, word: str) -> tuple:
+        """return the word with a list of all the Strong's val related to the word"""
         return tuple((word, [k for k in self.data[word][1].keys()]))
