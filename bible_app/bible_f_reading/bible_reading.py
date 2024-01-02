@@ -10,11 +10,7 @@ def read_file(f_name: str) -> str:
 
 
 def clean_bible(bible: str) -> []:
-    replace_str = string.punctuation\
-        .replace('{', '') \
-        .replace('}', '') \
-        .replace('-', '')\
-        .replace('(', '')\
-        .replace(')', '')
-    # return bible.translate(str.maketrans('', '', replace_str)).lower().split()
+    punc_to_keep = str.maketrans("", "", "{}-{}()")
+    replace_str = string.punctuation.translate(punc_to_keep)
+
     return bible.translate(str.maketrans('', '', replace_str)).lower().split()

@@ -30,6 +30,10 @@ class DictOne(BibleDictionary):
         verse = []
 
         for i, word in enumerate(b_lst):
+            # add case where parenthesis is before and after a word
+            # but if a bracket comes before or after
+            # the parenthesis do nothing
+
             word, strongs = self.separate_strongs(word)
 
             if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
