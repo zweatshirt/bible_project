@@ -2,13 +2,23 @@ from bible_f_reading.bible_reading import *
 from bible_to_dicts.dict_one import DictOne
 from mem_mgmt.mem_mgmt import *
 from bible_app.defn_api_handling.defn_api_handling import *
-import kivy  # will implement eventually
 import pickle  #  will implement eventually
+
+# TODO:
+# Change bible from undercase to normal uppercase
+# but in doing so, allow undercase searching
+# add the - back into the punctuation
+# implement a NLP library for verse searching
+# do ignore lowercase for the ditionary?
+# lots to do...
+
+# some words are not getting added correctly because of parentheses after the word
+# but changing the parentheses to spaces in the text causes a crash
 
 
 def main():
 
-    bible = read_bible(BIBLE_FILE)
+    bible = read_file(BIBLE_FILE)
 
     # bible lower cased and stripped of most punctuation
     cleaned_bible: [] = clean_bible(bible)  # needs work
@@ -25,6 +35,12 @@ def main():
 
     # List of JSON of as many words in the bible as possible with definitions
     dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
+    unreadable = read_file(LEFTOVER_WORDS_FILE)
+
+    delete_leftover_duplicates()
+
+
+
 
     process = psutil.Process()
     mem_size(process)
