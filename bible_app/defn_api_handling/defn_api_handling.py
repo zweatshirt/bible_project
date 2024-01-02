@@ -6,7 +6,7 @@ from bible_app.bible_to_dicts.dict_two import DictTwo
 
 """
 TODO:
-    The functions in this file have been modified but need to be properly tested.
+    The functions in this f_name have been modified but need to be properly tested.
 """
 
 DICTIONARY_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
@@ -15,7 +15,7 @@ LEFTOVER_WORDS_FILE = 'bible_app/data_files/unreadable_by_api.txt'  # words API 
 
 
 def append_api_data(d: DictTwo or []):
-    """gets API data in the form of a json object and appends it to a .json file"""
+    """gets API data in the form of a json object and appends it to a .json f_name"""
     with open(DEFINITIONS_JSON_FILE, 'a', encoding='utf-8') as f:
         for k in d:
             json_data = get_api_data(k, 60)
@@ -28,7 +28,6 @@ def get_api_data(word: str, sleep_time, sleep_count=0) -> str:
     """grabs definition of a given word from the API"""
     word = word.lower()  # hmmmm
     try:
-        word = word.lower()
         res = requests.get(DICTIONARY_API + word, timeout=5)
         return res.text if 'title' not in res.text else no_definition_for(word)
     except requests.exceptions.HTTPError:
@@ -45,36 +44,51 @@ def get_api_data(word: str, sleep_time, sleep_count=0) -> str:
 def no_definition_for(word: str):
     """
     if there are no definitions for a word we want to save the word for later attempts.
-    should probably be rewritten so it doesn't open the file every time an append is needed.
+    should probably be rewritten so it doesn't open the f_name every time an append is needed.
     """
     f_append(LEFTOVER_WORDS_FILE, word)
     return None
 
 
 def f_append(f_name, vals):
-    """basic file append function"""
-    with open(f_name, 'a', encoding='utf-8') as f:
-        for v in vals:
-            f.write(v)
+    """basic f_name append function"""
+    try:
+        with open(f_name, 'a', encoding='utf-8') as f:
+            for v in vals:
+                f.write(v)
+    except FileNotFoundError as e:
+        print(e)
+
 
 
 def read_def_json_f(f_name) -> []:
-    """returns list of all json objs from a file"""
-    with open(f_name, 'r') as f:
-        return [loads(line) for line in f if line.strip()]
+    """returns list of all json objs from a f_name"""
+
+    try:
+        with open(f_name, 'r') as f:
+            return [loads(line) for line in f if line.strip()]
+    except FileNotFoundError as e:
+        print(e)
 
 
-def compare_definitions_to_dict(file, b_two: {}):
+def compare_definitions_to_dict(f_name, b_two: {}) -> []:
     # dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
-    f = read_file(file)
-    
-    # if file == DEFINITIONNS_JSON_FILE:  # implement
+    # f = read_file(f_name)
+    lst = []
+    try:
+        with open(f_name, 'r') as f:
+            if f_name == DEFINITIONS_JSON_FILE:  # implement
+                lst = [loads(line)[0]['word'] for line in f if line.strip()
+                       if loads(line)[0]['word'] not in b_two.keys()]
+                print(lst)
 
-    if file == LEFTOVER_WORDS_FILE:
-        for i in f.split():
-        if i not in b_two.keys():
-            print(i)
-    
+            if f_name == LEFTOVER_WORDS_FILE:
+                lst = [l for line in f if (l := line.replace('\n', '')) not in b_two.keys()]
+                print(lst)
+
+        return lst if lst else None
+    except FileNotFoundError as e:
+        print(e)
 
 
 
@@ -84,5 +98,3 @@ def delete_leftover_duplicates():
         f.seek(0)
         f.truncate()
         [f.write("{}".format(line)) for line in no_dupes]
-
-

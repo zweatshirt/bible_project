@@ -39,8 +39,8 @@ def main():
 
     delete_leftover_duplicates()
 
-
-
+    compare_definitions_to_dict(DEFINITIONS_JSON_FILE, b_two)
+    compare_definitions_to_dict(LEFTOVER_WORDS_FILE, b_two)
 
     process = psutil.Process()
     mem_size(process)
