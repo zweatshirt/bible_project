@@ -9,7 +9,7 @@ import pickle  #  will implement eventually
 # but in doing so, allow undercase searching
 # add the - back into the punctuation
 # implement a NLP library for verse searching
-# do ignore lowercase for the ditionary?
+# do ignore lowercase for the dictionary?
 # lots to do...
 
 # some words are not getting added correctly because of parentheses after the word
