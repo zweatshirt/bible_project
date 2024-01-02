@@ -64,13 +64,13 @@ def read_def_json_f(f_name) -> []:
         return [loads(line) for line in f if line.strip()]
 
 
-def compare_definitions_to_dict(file, b_two: {}):
+def compare_definitions_to_dict(f_name, b_two: {}):
     # dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
-    f = read_file(file)
+    f = read_file(f_name)
     
     # if file == DEFINITIONNS_JSON_FILE:  # implement
 
-    if file == LEFTOVER_WORDS_FILE:
+    if f_name == LEFTOVER_WORDS_FILE:
         for i in f.split():
         if i not in b_two.keys():
             print(i)
