@@ -7,6 +7,16 @@ class DictOne(BibleDictionary):
         super().__init__()
         self.data = self.bible_to_dict(bible_lst)
 
+    # def __getitem__(self, key):
+    #     return self.__getitem__(key.lower())
+    #
+    # def __setitem__(self, key, value):
+    #     return self.__setitem__(key.lower(), value)
+    #
+    # def __delitem__(self, key):
+    #     return self.__delitem__(key.lower())
+
+
     @staticmethod
     def clean_verse(verse: []):
         return ' '.join([word[0] for word in verse])
@@ -36,7 +46,7 @@ class DictOne(BibleDictionary):
 
             word, strongs = self.separate_strongs(word)
 
-            if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
+            if (word.lower() == 'chapter' or word.lower() == 'psalm') and b_lst[i + 1].isdigit():
 
                 chapter = int(b_lst[i + 1])
                 if chapter == 1:
@@ -94,8 +104,8 @@ class DictOne(BibleDictionary):
     def _b_name_at_end(self, bible_lst, i):
         if not i < len(bible_lst) - 2:
             return False
-        if not (bible_lst[i + 1] + " " + bible_lst[i + 2] == 'chapter 1' or
-                bible_lst[i + 1] + " " + bible_lst[i + 2] == 'psalm 1'):
+        if not (bible_lst[i + 1].lower() + " " + bible_lst[i + 2] == 'chapter 1' or
+                bible_lst[i + 1].lower() + " " + bible_lst[i + 2] == 'psalm 1'):
             return False
         return True
 

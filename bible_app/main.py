@@ -26,10 +26,11 @@ def main():
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_bible)
+    # print(b)
     print(b['acts'][4][36])
-
+    #
     # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
-    # {str: [int, {str: int}]}
+    # # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_bible)
     print(b_two['word'])
 
@@ -37,7 +38,7 @@ def main():
     dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
     unreadable = read_file(LEFTOVER_WORDS_FILE)
 
-    delete_leftover_duplicates()
+    delete_leftover_duplicates(LEFTOVER_WORDS_FILE)
 
     compare_definitions_to_dict(DEFINITIONS_JSON_FILE, b_two)
     compare_definitions_to_dict(LEFTOVER_WORDS_FILE, b_two)

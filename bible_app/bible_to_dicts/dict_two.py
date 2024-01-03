@@ -6,6 +6,15 @@ class DictTwo(BibleDictionary):
         super().__init__()
         self.data = self.bible_to_dict(bible_lst)
 
+    # def __getitem__(self, key):
+    #     return self.data.__getitem__(key.casefold())
+    #
+    # def __setitem__(self, key, value):
+    #     return self.data.__setitem__(key.casefold(), value)
+    #
+    # def __delitem__(self, key):
+    #     return self.data.__delitem__(key.casefold())
+
     def bible_to_dict(self, b_lst: []):
         """returns nested dict of all words in the bible."""
         words_dict = {}
@@ -15,7 +24,7 @@ class DictTwo(BibleDictionary):
         for i, word in enumerate(b_lst):
             word, strongs = self.separate_strongs(word)
 
-            if (word == 'chapter' or word == 'psalm') and b_lst[i + 1].isdigit():
+            if (word.casefold() == 'chapter' or word.casefold() == 'psalm') and b_lst[i + 1].isdigit():
                 chapter = int(b_lst[i + 1])
 
                 if chapter == 1:

@@ -10,7 +10,24 @@ def read_file(f_name: str) -> str:
 
 
 def clean_bible(bible: str) -> []:
-    punc_to_keep = str.maketrans("", "", "{}-{}()")
+    punc_to_keep = str.maketrans('', '', '{}-')
     replace_str = string.punctuation.translate(punc_to_keep)
+    new = ''
+    for i, letter in enumerate(bible):
 
-    return bible.translate(str.maketrans('', '', replace_str)).lower().split()
+        if letter in replace_str:
+            if bible[i] == '(' and bible[i - 1] != '{':
+                new += ' ( '
+            elif bible[i] == ')' and bible[i + 1] != '}':
+                new += ' ) '
+            else:
+                if bible[i] == '(' or bible[i] == ')':
+                    new += bible[i]
+        else:
+            new += bible[i]
+    return new.lower().split()
+
+
+
+
+    # return bible.translate(str.maketrans('', '', replace_str)).lower().split()

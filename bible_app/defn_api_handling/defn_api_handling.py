@@ -60,7 +60,6 @@ def f_append(f_name, vals):
         print(e)
 
 
-
 def read_def_json_f(f_name) -> []:
     """returns list of all json objs from a f_name"""
 
@@ -71,14 +70,16 @@ def read_def_json_f(f_name) -> []:
         print(e)
 
 
-
 def compare_definitions_to_dict(f_name, b_two: {}) -> []:
-    # dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
-    # f = read_file(f_name)
+    """
+        Returns all words that are in the given file
+        but are not in the dict containing the words of the bible
+    """
     lst = []
     try:
+
         with open(f_name, 'r') as f:
-            if f_name == DEFINITIONS_JSON_FILE:  # implement
+            if f_name == DEFINITIONS_JSON_FILE:
                 lst = [loads(line)[0]['word'] for line in f if line.strip()
                        if loads(line)[0]['word'] not in b_two.keys()]
                 print(lst)
@@ -86,16 +87,21 @@ def compare_definitions_to_dict(f_name, b_two: {}) -> []:
             if f_name == LEFTOVER_WORDS_FILE:
                 lst = [l for line in f if (l := line.replace('\n', '')) not in b_two.keys()]
                 print(lst)
-
         return lst if lst else None
+
     except FileNotFoundError as e:
         print(e)
 
 
+def delete_leftover_duplicates(f_name):
 
-def delete_leftover_duplicates():
-    with open(LEFTOVER_WORDS_FILE, 'r+', encoding='utf-8') as f:
-        no_dupes = set(f.readlines())
-        f.seek(0)
-        f.truncate()
-        [f.write("{}".format(line)) for line in no_dupes]
+    try:
+
+        with open(f_name, 'r+', encoding='utf-8') as f:
+            no_dupes = set(f.readlines())
+            f.seek(0)
+            f.truncate()
+            [f.write("{}".format(line)) for line in no_dupes]
+
+    except FileNotFoundError as e:
+        print(e)
