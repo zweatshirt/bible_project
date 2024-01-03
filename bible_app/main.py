@@ -6,8 +6,10 @@ import pickle  #  will implement eventually
 
 # TODO:
 # Change bible from undercase to normal uppercase
-# but in doing so, allow undercase searching
-# add the - back into the punctuation
+# but in doing so, allow undercase searching - currently not working
+# add the - back into the punctuation. Add all punctuation back but separate it by spaces so its separated in the dicts
+# ensure that any searches from hereon check if the word contains only alpha characters apart from -
+
 # implement a NLP library for verse searching
 # do ignore lowercase for the dictionary?
 # lots to do...
@@ -22,17 +24,18 @@ def main():
 
     # bible lower cased and stripped of most punctuation
     cleaned_bible: [] = clean_bible(bible)  # needs work
-
+    print(cleaned_bible[:100])
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_bible)
-    # print(b)
-    print(b['acts'][4][36])
+    print(b['genesis'])
+    # print(b['Acts'][4][36])
+    # print(b['revelation'][22])
     #
     # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
     # # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_bible)
-    print(b_two['word'])
+    # print(b_two['word'])
 
     # List of JSON of as many words in the bible as possible with definitions
     dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
@@ -40,8 +43,8 @@ def main():
 
     delete_leftover_duplicates(LEFTOVER_WORDS_FILE)
 
-    compare_definitions_to_dict(DEFINITIONS_JSON_FILE, b_two)
-    compare_definitions_to_dict(LEFTOVER_WORDS_FILE, b_two)
+    # compare_definitions_to_dict(DEFINITIONS_JSON_FILE, b_two)
+    # compare_definitions_to_dict(LEFTOVER_WORDS_FILE, b_two)
 
     process = psutil.Process()
     mem_size(process)

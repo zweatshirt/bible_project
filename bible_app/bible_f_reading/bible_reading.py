@@ -10,6 +10,7 @@ def read_file(f_name: str) -> str:
 
 
 def clean_bible(bible: str) -> []:
+    # optimize to just create list val for every space
     punc_to_keep = str.maketrans('', '', '{}-')
     replace_str = string.punctuation.translate(punc_to_keep)
     new = ''
@@ -20,11 +21,11 @@ def clean_bible(bible: str) -> []:
                 new += ' ( '
             elif bible[i] == ')' and bible[i + 1] != '}':
                 new += ' ) '
-            else:
-                if bible[i] == '(' or bible[i] == ')':
-                    new += bible[i]
+            elif bible[i] == '(' or bible[i] == ')':
+                new += letter
         else:
-            new += bible[i]
+            new += letter
+    # return new.casefold().split()
     return new.lower().split()
 
 

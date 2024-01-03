@@ -6,11 +6,22 @@ class BibleDictionary(UserDict):
     def __init__(self):
         super().__init__()
 
+    # should work... but it doesn't
+    # def __getitem__(self, key):
+    #     return super().__getitem__(key.casefold())
+    #
+    # def __setitem__(self, key, value):
+    #     return super().__setitem__(key.casefold(), value)
+    #
+    # def __delitem__(self, key):
+    #     return super().__delitem__(key.casefold())
+
     # refactor: looks awful
     def _is_ch_or_book(self, bible_lst, i, book, word):
-        if i != 0 and bible_lst[i - 1] != book:
-            if not ((bible_lst[i - 1] == 'chapter' or bible_lst[i - 1] == 'psalm') and word.isdigit()):
-                if not ((word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit()):
+        if i != 0 and bible_lst[i - 1].casefold() != book:
+            if not ((bible_lst[i - 1].casefold() == 'chapter' or bible_lst[
+                i - 1].casefold() == 'psalm') and word.isdigit()):
+                if not ((word.casefold() == 'chapter' or word.casefold() == 'psalm') and bible_lst[i + 1].isdigit()):
                     return False
         return True
 
