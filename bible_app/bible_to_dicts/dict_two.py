@@ -1,22 +1,32 @@
+import string
+
 from bible_app.bible_to_dicts.bible_dictionary import BibleDictionary
+from string import punctuation
 
 
 class DictTwo(BibleDictionary):
     def __init__(self, bible_lst: []):
+        """
+            BibleDictionary inherits from UserDict, which is a wrapper of the dict class.
+            To access the actual dictionary of UserDict we must use the data instance var.
+        """
         super().__init__()
+        # Initialize the dictionary. Read bible_to_dict() comments for more information.
         self.data = self.bible_to_dict(bible_lst)
 
-    # def __getitem__(self, key):
-    #     return self.data.__getitem__(key.casefold())
-    #
-    # def __setitem__(self, key, value):
-    #     return self.data.__setitem__(key.casefold(), value)
-    #
-    # def __delitem__(self, key):
-    #     return self.data.__delitem__(key.casefold())
+    def __getitem__(self, word: str):
+        """All words in the dictionary are lowercase, so the passed key can be case-folded"""
+        if word.isalpha():
+            return self.data[word.casefold()]
+        return self.data[word]
 
     def bible_to_dict(self, b_lst: []):
-        """returns nested dict of all words in the bible."""
+        """
+            Returns nested dict of all words in the bible.
+            Each word has the occurrence as a value, and Strong's Concordance numbers as a value.
+            The Strong's Concordance numbers are themselves keys pointing
+            to a list of all verses where the word is located.
+        """
         words_dict = {}
         book = chapter = ''
         verse_num = 0
@@ -34,13 +44,13 @@ class DictTwo(BibleDictionary):
                 if word.isdigit():
                     verse_num = int(word)  # grab verse num
 
-            self._add_to_dict(words_dict, word, strongs, book, chapter, verse_num)
+            self._add_to_dict(words_dict, word.casefold(), strongs, book, chapter, verse_num)
 
         return words_dict
 
     def _add_to_dict(self, words_dict, word, strongs, book, chapter, verse_num):
-        """helper method for bible_to_dict(). Adds all the keys and values to the dict"""
-        if not word.isdigit():
+        """Helper method for bible_to_dict(). Adds all the keys and values to the dict."""
+        if word.isalpha():
             if word not in words_dict:
                 words_dict[word] = [1, {}]
             else:
@@ -57,11 +67,13 @@ class DictTwo(BibleDictionary):
 
     def get_count_of_word(self, word: str) -> int:
         """returns word occurrence count given a word"""
+        word = word.casefold()
         print('There is a total of {} occurrences for the word {}.'.format(occurrences := self.data[word][0], word))
         return occurrences
 
     def get_strongs_count_for_word(self, word: str) -> int:
         """returns the count of all Strong's vals occurrences for a given word"""
+        word = word.casefold()
         count = 0
         for k in self.data[word][1].keys():
             count += self.data[word][1][k]
@@ -69,4 +81,5 @@ class DictTwo(BibleDictionary):
 
     def get_word_strongs_tuple_for(self, word: str) -> tuple:
         """return the word with a list of all the Strong's val related to the word"""
+        word = word.casefold()
         return tuple((word, [k for k in self.data[word][1].keys()]))

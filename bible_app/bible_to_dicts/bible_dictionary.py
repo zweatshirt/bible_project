@@ -6,22 +6,11 @@ class BibleDictionary(UserDict):
     def __init__(self):
         super().__init__()
 
-    # should work... but it doesn't
-    # def __getitem__(self, key):
-    #     return super().__getitem__(key.casefold())
-    #
-    # def __setitem__(self, key, value):
-    #     return super().__setitem__(key.casefold(), value)
-    #
-    # def __delitem__(self, key):
-    #     return super().__delitem__(key.casefold())
-
     # refactor: looks awful
     def _is_ch_or_book(self, bible_lst, i, book, word):
-        if i != 0 and bible_lst[i - 1].casefold() != book:
-            if not ((bible_lst[i - 1].casefold() == 'chapter' or bible_lst[
-                i - 1].casefold() == 'psalm') and word.isdigit()):
-                if not ((word.casefold() == 'chapter' or word.casefold() == 'psalm') and bible_lst[i + 1].isdigit()):
+        if i != 0 and bible_lst[i - 1] != book:
+            if not ((bible_lst[i - 1] == 'chapter' or bible_lst[i - 1] == 'psalm') and word.isdigit()):
+                if not ((word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit()):
                     return False
         return True
 
@@ -31,19 +20,22 @@ class BibleDictionary(UserDict):
         return bible_lst[i - 1]
 
     def bible_to_dict(self, bible_lst: []) -> {}:
+        """
+            Method intended to initialize the dictionary.
+        """
         pass
 
-    # removes Strong's from a word and returns the word and Strong's
     @staticmethod
     def separate_strongs(word: str) -> (str, str):
+        """Removes Strong's from a word and returns the word and Strong's"""
         strongs = ''
         if '{' in word:
             strongs = tuple(findall('\{.*?\}', word))
             word = sub('\{.*?\}', '', word)
         return word, strongs
 
-    # recursive function to get every single key in a nested dictionary
     def yield_all_keys(self, d: {}):
+        """recursive function to get every single key in a nested dictionary"""
         for key, value in d.items():
             if type(value) is dict:
                 yield from self.yield_all_keys(value)
@@ -51,7 +43,17 @@ class BibleDictionary(UserDict):
                 yield key, value
 
     def get_key_list(self):
+        """
+            Returns list of keys.
+            NOT recursive for nested dictionary cases.
+            Slow, but helpful in certain use cases.
+        """
         return [key for key in self.data.keys()]
 
     def get_value_list(self):
-        return [val for val in self.data.values()]
+        """
+            Returns list of values.
+            NOT recursive for nested dictionary cases.
+            Slow, but helpful in certain use cases.
+        """
+        return [self.data.values()]

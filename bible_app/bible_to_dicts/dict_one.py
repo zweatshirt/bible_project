@@ -4,9 +4,14 @@ from bible_app.bible_to_dicts.bible_dictionary import BibleDictionary
 # bible -> book -> chapter -> verse -> words
 class DictOne(BibleDictionary):
     def __init__(self, bible_lst: []):
-        super().__init__()
-        self.data = self.bible_to_dict(bible_lst)
+        """
+            BibleDictionary inherits from UserDict, which is a wrapper of the dict class.
+            To access the actual dictionary of UserDict we must use the data instance var.
 
+        """
+        super().__init__()
+        # initialize dictionary. Read bible_to_dict for more information.
+        self.data = self.bible_to_dict(bible_lst)
 
     @staticmethod
     def clean_verse(verse: []):
@@ -26,18 +31,18 @@ class DictOne(BibleDictionary):
         return len(dct)
 
     def bible_to_dict(self, b_lst: []):
+        """
+            Initializing method returning nested dict of the entire bible mapped by book, chapter, and verse.
+        """
         bible_dict = {}
         book = chapter = verse_num = None
         verse = []
 
         for i, word in enumerate(b_lst):
-            # add case where parenthesis is before and after a word
-            # but if a bracket comes before or after
-            # the parenthesis do nothing
 
             word, strongs = self.separate_strongs(word)
 
-            if (word.casefold() == 'chapter' or word.casefold() == 'psalm') and b_lst[i + 1].isdigit():
+            if (word.lower() == 'chapter' or word.lower() == 'psalm') and b_lst[i + 1].isdigit():
 
                 chapter = int(b_lst[i + 1])
                 if chapter == 1:
@@ -95,8 +100,8 @@ class DictOne(BibleDictionary):
     def _b_name_at_end(self, bible_lst, i):
         if not i < len(bible_lst) - 2:
             return False
-        if not (bible_lst[i + 1].casefold() + " " + bible_lst[i + 2] == 'chapter 1' or
-                bible_lst[i + 1].casefold() + " " + bible_lst[i + 2] == 'psalm 1'):
+        if not (bible_lst[i + 1].lower() + " " + bible_lst[i + 2] == 'chapter 1' or
+                bible_lst[i + 1].lower() + " " + bible_lst[i + 2] == 'psalm 1'):
             return False
         return True
 
