@@ -73,7 +73,10 @@ def read_def_json_f(f_name) -> []:
 def compare_definitions_to_dict(f_name, b_two: {}) -> []:
     """
         Returns all words that are in the given file
-        but are not in the dict containing the words of the bible
+        but are not in the dict containing the words of the bible.
+        Mostly for error/bug checking. Will implement a function
+        to see if the word is in the bible dict 
+        and not in the DEFINITIONS_JSON_FILE soon.
     """
     lst = []
     try:
