@@ -6,7 +6,7 @@ from bible_app.bible_to_dicts.dict_two import DictTwo
 
 """
 TODO:
-    The functions in this f_name have been modified but need to be properly tested.
+    The functions in this file have been modified but need to be properly tested.
 """
 
 DICTIONARY_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
@@ -51,7 +51,7 @@ def no_definition_for(word: str):
 
 
 def f_append(f_name, vals):
-    """basic f_name append function"""
+    """basic file append function"""
     try:
         with open(f_name, 'a', encoding='utf-8') as f:
             for v in vals:
@@ -70,12 +70,24 @@ def read_def_json_f(f_name) -> []:
         print(e)
 
 
-def compare_definitions_to_dict(f_name, b_two: {}) -> []:
+def dict_vals_not_in_defns(f_name, b_two):
+    """Returns all the values that are in the definitions file but not in the bible dictionary."""
+    try:
+        if f_name == DEFINITIONS_JSON_FILE:
+            with open(f_name, 'r') as f:
+                return [loads(line)[0]['word'] for line in f if line.strip()
+                        if loads(line)[0]['word'] not in b_two.keys()]
+        return "File exists but not is valid for this function."
+    except FileNotFoundError as e:
+        print(e)
+
+
+
+def defns_not_in_dict(f_name, b_two: {}) -> []:
     """
         Returns all words that are in the given file
         but are not in the dict containing the words of the bible
     """
-    lst = []
     try:
 
         with open(f_name, 'r') as f:
@@ -94,7 +106,6 @@ def compare_definitions_to_dict(f_name, b_two: {}) -> []:
 
 
 def delete_leftover_duplicates(f_name):
-
     try:
 
         with open(f_name, 'r+', encoding='utf-8') as f:

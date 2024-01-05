@@ -2,7 +2,8 @@ from bible_f_reading.bible_reading import *
 from bible_to_dicts.dict_one import DictOne
 from mem_mgmt.mem_mgmt import *
 from bible_app.defn_api_handling.defn_api_handling import *
-import pickle  #  will implement eventually
+import pickle  # will implement eventually
+
 
 # TODO:
 # Change bible from undercase to normal uppercase
@@ -17,7 +18,6 @@ import pickle  #  will implement eventually
 
 
 def main():
-
     bible = read_file(BIBLE_FILE)
 
     # bible lower cased and stripped of most punctuation
@@ -41,8 +41,11 @@ def main():
 
     delete_leftover_duplicates(LEFTOVER_WORDS_FILE)
 
-    compare_definitions_to_dict(DEFINITIONS_JSON_FILE, b_two)
-    compare_definitions_to_dict(LEFTOVER_WORDS_FILE, b_two)
+    # defns_not_in_dict(DEFINITIONS_JSON_FILE, b_two)
+    # defns_not_in_dict(LEFTOVER_WORDS_FILE, b_two)
+    to_append_to_defns = dict_vals_not_in_defns(DEFINITIONS_JSON_FILE, b_two)
+    # for i in to_append_to_defns:
+
 
     process = psutil.Process()
     mem_size(process)
