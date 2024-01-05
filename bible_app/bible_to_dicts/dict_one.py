@@ -7,7 +7,6 @@ class DictOne(BibleDictionary):
         """
             BibleDictionary inherits from UserDict, which is a wrapper of the dict class.
             To access the actual dictionary of UserDict we must use the data instance var.
-
         """
         super().__init__()
         # initialize dictionary. Read bible_to_dict for more information.

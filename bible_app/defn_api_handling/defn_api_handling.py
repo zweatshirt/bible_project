@@ -109,6 +109,7 @@ def defns_not_in_dict(f_name, b_two: {}) -> []:
 
 
 def delete_leftover_duplicates(f_name):
+    """Deletes left over duplicate lines in a given file"""
     try:
 
         with open(f_name, 'r+', encoding='utf-8') as f:
