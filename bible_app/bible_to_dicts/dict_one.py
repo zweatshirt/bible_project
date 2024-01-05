@@ -32,7 +32,8 @@ class DictOne(BibleDictionary):
 
     def bible_to_dict(self, b_lst: []):
         """
-            Initializing method returning nested dict of the entire bible mapped by book, chapter, and verse.
+            Initializing method returning nested dict of 
+            the entire bible mapped by book, chapter, and verse.
         """
         bible_dict = {}
         book = chapter = verse_num = None
