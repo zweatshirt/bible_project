@@ -15,14 +15,13 @@ class BibleDictionary(UserDict):
         return True
 
     def _book_name_helper(self, bible_lst, i):
+        """Grabs the book name (there are 66 books in the KJV)."""
         if bible_lst[i - 2].isdigit():  # in cases where the book name starts with a num e.g. 1 Samuel
             return bible_lst[i - 2] + " " + bible_lst[i - 1]
         return bible_lst[i - 1]
 
     def bible_to_dict(self, bible_lst: []) -> {}:
-        """
-            Method intended to initialize the dictionary.
-        """
+        """Initialize the underlying UserDict dictionary."""
         pass
 
     @staticmethod
