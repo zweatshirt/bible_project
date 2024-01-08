@@ -45,7 +45,7 @@ def no_definition_for(word: str):
     """
     if there are no definitions for a word we want to save the word for later attempts.
     should probably be rewritten so it doesn't open the file every time an append is needed.
-    kinda redudant function but made it for readability
+    a bit of a redudant function but made it for readability
     """
     f_append(LEFTOVER_WORDS_FILE, word)
     
@@ -62,8 +62,7 @@ def f_append(f_name, vals):
 
 
 def read_def_json_f(f_name) -> []:
-    """returns list of all json objs from a f_name"""
-
+    """returns list of all json objs from a file"""
     try:
         with open(f_name, 'r') as f:
             return [loads(line) for line in f if line.strip()]
@@ -72,7 +71,10 @@ def read_def_json_f(f_name) -> []:
 
 
 def dict_vals_not_in_defns(f_name, b_two):
-    """Returns all the values that are in the definitions file but not in the bible dictionary."""
+    """
+        Returns all the values that are in the definitions file but not in the bible dictionary.
+        Mostly for bug checking.
+    """
     try:
         if f_name == DEFINITIONS_JSON_FILE:
             with open(f_name, 'r') as f:
@@ -88,9 +90,7 @@ def defns_not_in_dict(f_name, b_two: {}) -> []:
     """
         Returns all words that are in the given file
         but are not in the dict containing the words of the bible.
-        Mostly for error/bug checking. Will implement a function
-        to see if the word is in the bible dict 
-        and not in the DEFINITIONS_JSON_FILE soon.
+        Mostly for bug checking.
     """
     try:
 
