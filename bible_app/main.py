@@ -46,8 +46,9 @@ def main():
 if __name__ == '__main__':
     main()
 
-# with vocab dictionary, create Strong's Concordance to map to verses
-# not working, I'm not sure why
+
+# not working, I'm not sure why. Will work on later.
+# It's (supposed to be) a recursive dictionaries val finding function
 # def getpath(nested_dict, value, prepath=()):
 #     for k, v in nested_dict.items():
 #         path = prepath + (k,)
