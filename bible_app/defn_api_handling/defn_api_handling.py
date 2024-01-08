@@ -44,7 +44,7 @@ def get_api_data(word: str, sleep_time, sleep_count=0) -> str:
 def no_definition_for(word: str):
     """
     if there are no definitions for a word we want to save the word for later attempts.
-    should probably be rewritten so it doesn't open the f_name every time an append is needed.
+    should probably be rewritten so it doesn't open the file every time an append is needed.
     """
     f_append(LEFTOVER_WORDS_FILE, word)
     return None
