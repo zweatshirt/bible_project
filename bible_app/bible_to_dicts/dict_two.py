@@ -68,7 +68,8 @@ class DictTwo(BibleDictionary):
     def get_count_of_word(self, word: str) -> int:
         """returns word occurrence count given a word"""
         word = word.casefold()
-        print('There is a total of {} occurrences for the word {}.'.format(occurrences := self.data[word][0], word))
+        print('There is a total of {} occurrences for the word {}.'
+              .format(occurrences := self.data[word][0], word))
         return occurrences
 
     def get_strongs_count_for_word(self, word: str) -> int:

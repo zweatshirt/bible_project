@@ -33,19 +33,18 @@ def main():
     # # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_bible)
     print(b_two['Word'])
-    print(b_two.get_value_list())
 
     # List of JSON of as many words in the bible as possible with definitions
     dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
     unreadable = read_file(LEFTOVER_WORDS_FILE)
 
     delete_leftover_duplicates(LEFTOVER_WORDS_FILE)
+    delete_leftover_duplicates(DEFINITIONS_JSON_FILE)
 
     # defns_not_in_dict(DEFINITIONS_JSON_FILE, b_two)
     # defns_not_in_dict(LEFTOVER_WORDS_FILE, b_two)
     to_append_to_defns = dict_vals_not_in_defns(DEFINITIONS_JSON_FILE, b_two)
     # for i in to_append_to_defns:
-
 
     process = psutil.Process()
     mem_size(process)

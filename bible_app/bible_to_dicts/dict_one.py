@@ -94,10 +94,11 @@ class DictOne(BibleDictionary):
 
         verse.append((word, strongs))
 
-    # in the event that the next book name  is appended to
-    # the end of the last chapter and verse of the current book.
-    # probably a better solution but...
     def _b_name_at_end(self, bible_lst, i):
+        """
+        Used for the edge case that the next book name is appended to
+        the end of the verse of the current book. A bandaid and needs to be improved...
+    """
         if not i < len(bible_lst) - 2:
             return False
         if not (bible_lst[i + 1].lower() + " " + bible_lst[i + 2] == 'chapter 1' or

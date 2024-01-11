@@ -26,10 +26,12 @@ def append_api_data(d: DictTwo or []):
 
 def get_api_data(word: str, sleep_time, sleep_count=0) -> str:
     """grabs definition of a given word from the API"""
-    word = word.lower()  # hmmmm
+    word = word.casefold()  # hmmmm
     try:
+
         res = requests.get(DICTIONARY_API + word, timeout=5)
         return res.text if 'title' not in res.text else no_definition_for(word)
+
     except requests.exceptions.HTTPError:
         if sleep_count == 5:
             no_definition_for(word)
@@ -53,19 +55,22 @@ def no_definition_for(word: str):
 def f_append(f_name, vals):
     """basic file append function"""
     try:
+
         with open(f_name, 'a', encoding='utf-8') as f:
             for v in vals:
                 f.write(v)
+
     except FileNotFoundError as e:
         print(e)
 
 
 def read_def_json_f(f_name) -> []:
     """returns list of all json objs from a f_name"""
-
     try:
+
         with open(f_name, 'r') as f:
             return [loads(line) for line in f if line.strip()]
+
     except FileNotFoundError as e:
         print(e)
 
@@ -73,14 +78,15 @@ def read_def_json_f(f_name) -> []:
 def dict_vals_not_in_defns(f_name, b_two):
     """Returns all the values that are in the definitions file but not in the bible dictionary."""
     try:
+
         if f_name == DEFINITIONS_JSON_FILE:
             with open(f_name, 'r') as f:
                 return [loads(line)[0]['word'] for line in f if line.strip()
                         if loads(line)[0]['word'] not in b_two.keys()]
+
         return "File exists but not is valid for this function."
     except FileNotFoundError as e:
         print(e)
-
 
 
 def defns_not_in_dict(f_name, b_two: {}) -> []:
@@ -102,6 +108,7 @@ def defns_not_in_dict(f_name, b_two: {}) -> []:
             if f_name == LEFTOVER_WORDS_FILE:
                 lst = [l for line in f if (l := line.replace('\n', '')) not in b_two.keys()]
                 print(lst)
+
         return lst if lst else None
 
     except FileNotFoundError as e:
