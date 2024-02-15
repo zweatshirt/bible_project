@@ -1,4 +1,5 @@
 # KJV Bible Project/Application:
+## Had to put this on hold due to school.
 
 ### Under GitHub's 'No Licence' Policy:
 
