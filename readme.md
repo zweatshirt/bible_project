@@ -22,9 +22,14 @@ Occurrences will be countable by the entire bible, by book, and by chapter.
 6. Ability to bookmark verses.
 7. A standalone Strong's Concordance
 
-## What is finished:
-Much of the backend work is done.  
-Everything is put cleanly into data structures (mostly nested dicts) and a JSON file.
+## What is finished: 
+Two dictionary datasets:
+1. A dictionary that allows quick accessing to all books of the bible by book, chapter, verse
+2. A dictionary of all words in the bible, with (most) definitions successfully mapped,
+   all verses where that word appears, the total occurences of the word,
+   and the total occurences of the Strongs.
+- These dictionaries are designed to interact with one another.
+
 
 
 ## Work to be finished:
