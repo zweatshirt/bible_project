@@ -35,7 +35,7 @@ Two dictionary datasets:
    and the total occurences of the Strongs.
 - These dictionaries are designed to interact with one another.
 
-Sript to access definitions API:
+Script to access definitions API:
 (the API used will need to be replaced, it doesn't support many Old English words)
 [Free Dictionary API](https://dictionaryapi.dev)
 
