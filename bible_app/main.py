@@ -31,24 +31,17 @@ def main():
     dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
     unreadable = read_file(LEFTOVER_WORDS_FILE)  # these words can't be understood by the API
 
-<<<<<<< HEAD
     delete_leftover_duplicates(LEFTOVER_WORDS_FILE)
     delete_leftover_duplicates(DEFINITIONS_JSON_FILE)
-=======
-    delete_leftover_duplicates(LEFTOVER_WORDS_FILE)  # file cleaner function
->>>>>>> cedb12f20731d09b715f5b1798d889f545a6f60a
 
     # the elements in this list need to be fed to the API.
     to_append_to_defns = dict_vals_not_in_defns(DEFINITIONS_JSON_FILE, b_two)
-<<<<<<< HEAD
-    # for i in to_append_to_defns:
 
-=======
+    # for i in to_append_to_defns:
     for i in to_append_to_defns:
         pass
     
     # monitor process size. Currently around .4 GB which is a lot.
->>>>>>> cedb12f20731d09b715f5b1798d889f545a6f60a
     process = psutil.Process()
     mem_size(process)
 
