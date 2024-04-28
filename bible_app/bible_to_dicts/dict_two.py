@@ -1,6 +1,6 @@
 import string
 
-from bible_app.bible_to_dicts.bible_dictionary import BibleDictionary
+from bible_to_dicts.bible_dictionary import BibleDictionary
 from string import punctuation
 
 

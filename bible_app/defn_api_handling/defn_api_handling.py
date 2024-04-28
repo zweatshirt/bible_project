@@ -1,8 +1,8 @@
 from json import loads
 import requests
 from time import sleep
-from bible_app.bible_f_reading.bible_reading import read_file
-from bible_app.bible_to_dicts.dict_two import DictTwo
+from bible_f_reading.bible_reading import read_file
+from bible_to_dicts.dict_two import DictTwo
 
 """
 TODO:
@@ -10,9 +10,8 @@ TODO:
 """
 
 DICTIONARY_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
-DEFINITIONS_JSON_FILE = 'bible_app/data_files/dictionary.json'
-LEFTOVER_WORDS_FILE = 'bible_app/data_files/unreadable_by_api.txt'  # words API could not get definitions for
-
+DEFINITIONS_JSON_FILE = 'data_files/dictionary.json'
+LEFTOVER_WORDS_FILE = 'data_files/unreadable_by_api.txt'
 
 def append_api_data(d: DictTwo or []):
     """gets API data in the form of a json object and appends it to a .json f_name"""
@@ -65,11 +64,11 @@ def f_append(f_name, vals):
         print(e)
 
 
-def read_def_json_f(f_name) -> []:
+def read_def_json_f(f_name):
     """returns list of all json objs from a file"""
     try:
 
-        with open(f_name, 'r') as f:
+        with open(f_name, 'r', encoding='utf-8') as f:
             return [loads(line) for line in f if line.strip()]
 
     except FileNotFoundError as e:
@@ -84,7 +83,7 @@ def dict_vals_not_in_defns(f_name, b_two):
     try:
 
         if f_name == DEFINITIONS_JSON_FILE:
-            with open(f_name, 'r') as f:
+            with open(f_name, 'r', encoding='utf-8') as f:
                 return [loads(line)[0]['word'] for line in f if line.strip()
                         if loads(line)[0]['word'] not in b_two.keys()]
 
@@ -93,7 +92,7 @@ def dict_vals_not_in_defns(f_name, b_two):
         print(e)
 
 
-def defns_not_in_dict(f_name, b_two: {}) -> []:
+def defns_not_in_dict(f_name, b_two):
     """
         Returns all words that are in the given file
         but are not in the dict containing the words of the bible.

@@ -1,4 +1,4 @@
-from bible_app.bible_to_dicts.bible_dictionary import BibleDictionary
+from bible_to_dicts.bible_dictionary import BibleDictionary
 
 
 # bible -> book -> chapter -> verse -> words
@@ -56,17 +56,20 @@ class DictOne(BibleDictionary):
                 return bible_dict
 
             # look at any word that isn't a chapter, psalm, or book title
-            if not self._is_ch_or_book(b_lst, i, book, word):
+        
+            if not self._is_book(book, word, b_lst[i + 1]) and not self._is_ch(word, b_lst[i + 1]):
+                
                 if word.isdigit():
                     verse_num = int(word)
                     verse = []  # reset verse list for every new verse num
                 else:
                     verse.append((word, strongs))
+ 
+            # get rid of occurrences where book names end up at end of verse
+            if self._b_name_at_end(b_lst, i):
+                verse.pop()
 
-                # get rid of occurrences where book names end up at end of verse
-                if self._b_name_at_end(b_lst, i):
-                    verse.pop()
-
+            if verse:
                 self._add_verse_to_dict(bible_dict, book, chapter, verse_num, verse)
 
         return bible_dict
@@ -85,25 +88,14 @@ class DictOne(BibleDictionary):
         if verse_num and verse_num not in bible_dict[book][chapter]:
             bible_dict[book][chapter][verse_num] = verse
 
-    # NEEDS TO BE FIXED AND IMPLEMENTED
-    def add_word_to_verse(self, verse, word, strongs):
-        if word.isdigit():
-            # reset verse list for every new verse num
-            del verse[:]
-            return int(word)
-
-        verse.append((word, strongs))
 
     def _b_name_at_end(self, bible_lst, i):
         """
         Used for the edge case that the next book name is appended to
         the end of the verse of the current book. A bandaid and needs to be improved...
     """
+        ch = ['Chapter 1', 'Psalm 1']
         if not i < len(bible_lst) - 2:
             return False
-        if not (bible_lst[i + 1].lower() + " " + bible_lst[i + 2] == 'chapter 1' or
-                bible_lst[i + 1].lower() + " " + bible_lst[i + 2] == 'psalm 1'):
-            return False
-        return True
-
+        return True if (f"{bible_lst[i + 1]} {bible_lst[i + 2]}" in ch) else False
     '''end helper methods for bible_to_dict()'''

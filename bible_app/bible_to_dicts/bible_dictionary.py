@@ -7,12 +7,16 @@ class BibleDictionary(UserDict):
         super().__init__()
 
     # refactor: looks awful
-    def _is_ch_or_book(self, bible_lst, i, book, word):
-        if i != 0 and bible_lst[i - 1] != book:
-            if not ((bible_lst[i - 1] == 'chapter' or bible_lst[i - 1] == 'psalm') and word.isdigit()):
-                if not ((word == 'chapter' or word == 'psalm') and bible_lst[i + 1].isdigit()):
-                    return False
-        return True
+    def _is_book(self, book, word, word_after):
+        ch = ['Chapter', 'Psalm']
+        return True if word == book and word_after in ch else False
+        # if ((bible_lst[i - 1] == 'Chapter'.casefold() or bible_lst[i - 1].casefold() == 'Psalm'.casefold()) and word.isdigit()):
+        #     return True
+    
+    def _is_ch(self, word, word_after):
+        ch = ['Chapter', 'Psalm']
+        return True if word in ch and word_after.isdigit() else False
+    
 
     def _book_name_helper(self, bible_lst, i):
         """Grabs the book name (there are 66 books in the KJV)."""
@@ -20,12 +24,12 @@ class BibleDictionary(UserDict):
             return bible_lst[i - 2] + " " + bible_lst[i - 1]
         return bible_lst[i - 1]
 
-    def bible_to_dict(self, bible_lst: []) -> {}:
+    def bible_to_dict(self, bible_lst):
         """Initialize the underlying UserDict dictionary."""
         pass
 
     @staticmethod
-    def separate_strongs(word: str) -> (str, str):
+    def separate_strongs(word):
         """Removes Strong's from a word and returns the word and Strong's"""
         strongs = ''
         if '{' in word:
@@ -33,7 +37,7 @@ class BibleDictionary(UserDict):
             word = sub('\{.*?\}', '', word)
         return word, strongs
 
-    def yield_all_keys(self, d: {}):
+    def yield_all_keys(self, d):
         """recursive function to get every single key in a nested dictionary"""
         for key, value in d.items():
             if type(value) is dict:
