@@ -21,11 +21,11 @@ def main():
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_bible)
-    print(b)
+
     # # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
     # # # {str: [int, {str: int}]}
-    b_two = DictTwo(cleaned_bible)
-    print(b_two['Word'])
+    # b_two = DictTwo(cleaned_bible)
+  
 
     # # List of JSON of as many words in the bible as possible with definitions
     # dictionary_json = read_def_json_f(DEFINITIONS_JSON_FILE)
@@ -47,8 +47,9 @@ def main():
 
     # the json file where the output must be stored 
 
-    # with open('bible.json', 'w', encoding='utf-8') as fp:
-    #     json.dump(dict(b), fp, indent=4)
+    with open('bible.json', 'w', encoding='utf-8') as fp:
+        json.dump(dict(b), fp, indent=2)
+        # json.dump(dict(b_two), fp, indent=2)
 
 
 if __name__ == '__main__':
