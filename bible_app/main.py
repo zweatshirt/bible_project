@@ -21,7 +21,7 @@ def main():
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_bible)
-
+    print(b['Genesis'][1][1])
     # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
     # # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_bible)

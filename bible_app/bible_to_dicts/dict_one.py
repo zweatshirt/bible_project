@@ -42,6 +42,7 @@ class DictOne(BibleDictionary):
         bible_dict = {}
         book = chapter = verse_num = None
         verse = []
+        new_verse = False
 
         for i, word in enumerate(b_lst):
 
@@ -52,7 +53,6 @@ class DictOne(BibleDictionary):
                 chapter = int(b_lst[i + 1])
                 if chapter == 1:
                     book = self._book_name_helper(b_lst, i)
-
                 self._add_book_to_dict(bible_dict, book)
                 self._add_ch_to_dict(bible_dict, book, chapter)
 
@@ -61,22 +61,22 @@ class DictOne(BibleDictionary):
                 return bible_dict
 
             # look at any word that isn't a chapter, psalm, or book title
-            if word == 'Chatper' and b_lst[i + 1] == 20:
-                print(word, b_lst[i + 1], book)
             if not self._is_book(book, word, b_lst[i + 1]) and not self._is_ch(word, b_lst[i + 1]):
-                
                 if word.isdigit():
+                    new_verse = True
                     verse_num = int(word)
-                    verse = []  # reset verse list for every new verse num
                 else:
+                    new_verse = False
                     verse.append((word, strongs)) if strongs else verse.append((word, None))
- 
             # get rid of occurrences where book names end up at end of verse
                 if self._b_name_at_end(b_lst, i):
                     verse.pop()
-            
-                self._add_verse_to_dict(bible_dict, book, chapter, verse_num, verse)
 
+            if not new_verse:
+                self._add_verse_to_dict(bible_dict, book, chapter, verse_num, verse)
+            else: verse = []
+            
+    
         return bible_dict
 
 
@@ -101,7 +101,7 @@ class DictOne(BibleDictionary):
         Used for the edge case that the next book name is appended to
         the end of the verse of the current book. A bandaid and needs to be improved...
         """
-        ch1 = [c + ' 1' for c in self.ch]
+        ch1 = ['Chapter 1', 'Psalm 1']
         if not i < len(bible_lst) - 2:
             return False
         return True if (f"{bible_lst[i + 1]} {bible_lst[i + 2]}" in ch1) else False
