@@ -5,17 +5,16 @@ from re import findall, sub
 class BibleDictionary(UserDict):
     def __init__(self):
         super().__init__()
+        self.ch = ['Chapter', 'Psalm']
 
     # refactor: looks awful
     def _is_book(self, book, word, word_after):
-        ch = ['Chapter', 'Psalm']
-        return True if word == book and word_after in ch else False
+        return True if word == book and word_after in self.ch else False
         # if ((bible_lst[i - 1] == 'Chapter'.casefold() or bible_lst[i - 1].casefold() == 'Psalm'.casefold()) and word.isdigit()):
         #     return True
     
     def _is_ch(self, word, word_after):
-        ch = ['Chapter', 'Psalm']
-        return True if word in ch and word_after.isdigit() else False
+        return True if word in self.ch and word_after.isdigit() else False
     
 
     def _book_name_helper(self, bible_lst, i):
