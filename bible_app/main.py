@@ -22,9 +22,9 @@ def main():
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_bible)
 
-    # # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
-    # # # {str: [int, {str: int}]}
-    # b_two = DictTwo(cleaned_bible)
+    # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
+    # # {str: [int, {str: int}]}
+    b_two = DictTwo(cleaned_bible)
   
 
     # # List of JSON of as many words in the bible as possible with definitions
@@ -49,7 +49,7 @@ def main():
 
     with open('bible.json', 'w', encoding='utf-8') as fp:
         json.dump(dict(b), fp, indent=2)
-        # json.dump(dict(b_two), fp, indent=2)
+        json.dump(dict(b_two), fp, indent=2)
 
 
 if __name__ == '__main__':
