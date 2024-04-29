@@ -57,18 +57,17 @@ class DictOne(BibleDictionary):
                 self._add_ch_to_dict(bible_dict, book, chapter)
 
             if i == len(b_lst) - 1:  # if last word in bible
-                verse.append((word, strongs))
+                verse.append((word, strongs)) if strongs else verse.append((word))
                 return bible_dict
 
             # look at any word that isn't a chapter, psalm, or book title
-        
             if not self._is_book(book, word, b_lst[i + 1]) and not self._is_ch(word, b_lst[i + 1]):
                 
                 if word.isdigit():
                     verse_num = int(word)
                     verse = []  # reset verse list for every new verse num
                 else:
-                    verse.append((word, strongs))
+                    verse.append((word, strongs)) if strongs else verse.append((word))
  
             # get rid of occurrences where book names end up at end of verse
             if self._b_name_at_end(b_lst, i):

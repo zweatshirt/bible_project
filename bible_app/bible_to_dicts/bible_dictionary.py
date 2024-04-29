@@ -7,12 +7,11 @@ class BibleDictionary(UserDict):
         super().__init__()
         self.ch = ['Chapter', 'Psalm']
 
-    # refactor: looks awful
+
     def _is_book(self, book, word, word_after):
         return True if word == book and word_after in self.ch else False
-        # if ((bible_lst[i - 1] == 'Chapter'.casefold() or bible_lst[i - 1].casefold() == 'Psalm'.casefold()) and word.isdigit()):
-        #     return True
     
+
     def _is_ch(self, word, word_after):
         return True if word in self.ch and word_after.isdigit() else False
     
@@ -27,6 +26,7 @@ class BibleDictionary(UserDict):
         """Initialize the underlying UserDict dictionary."""
         pass
 
+
     @staticmethod
     def separate_strongs(word):
         """Removes Strong's from a word and returns the word and Strong's"""
@@ -36,6 +36,7 @@ class BibleDictionary(UserDict):
             word = sub('\{.*?\}', '', word)
         return word, strongs
 
+
     def yield_all_keys(self, d):
         """recursive function to get every single key in a nested dictionary"""
         for key, value in d.items():
@@ -44,6 +45,7 @@ class BibleDictionary(UserDict):
             else:
                 yield key, value
 
+
     def get_key_list(self):
         """
             Returns list of keys.
@@ -51,6 +53,7 @@ class BibleDictionary(UserDict):
             Slow, but helpful in certain use cases.
         """
         return [key for key in self.data.keys()]
+
 
     def get_value_list(self):
         """
