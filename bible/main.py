@@ -22,7 +22,6 @@ def main():
     # bible -> book -> chapter -> verse -> words
     # {str: {int: {int: [str]}}}
     b = DictOne(cleaned_bible)
-    print(b['Genesis'][1][1])
     # word -> [word occurrence count, {[Strong's: Strong's occurrence count, [book, chapter, verse]]}]
     # # {str: [int, {str: int}]}
     b_two = DictTwo(cleaned_bible)
@@ -45,6 +44,7 @@ def main():
     # # monitor process size. Currently around .4 GB which is a lot.
     # process = psutil.Process()
     # mem_size(process)
+    print(b.get_key_list)
 
     # b_two = {k: v for k, v in b_two.items() if v is not None}
     with open('bible.json', 'w', encoding='utf-8') as fp:

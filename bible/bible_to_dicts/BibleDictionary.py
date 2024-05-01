@@ -49,10 +49,8 @@ class BibleDictionary(UserDict):
     def get_key_list(self):
         """
             Returns list of keys.
-            NOT recursive for nested dictionary cases.
-            Slow, but helpful in certain use cases.
         """
-        return [key for key in self.data.keys()]
+        return [self.keys()]
 
 
     def get_value_list(self):
@@ -61,4 +59,4 @@ class BibleDictionary(UserDict):
             NOT recursive for nested dictionary cases.
             Slow, but helpful in certain use cases.
         """
-        return [self.data.values()]
+        return [self.values()]

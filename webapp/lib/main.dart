@@ -6,9 +6,7 @@ import 'views/home.dart';
 
 
 void main() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+ 
   runApp(const BibleApp()); 
 }
 
@@ -22,6 +20,7 @@ class BibleApp extends StatefulWidget {
 }
 
 class _BibleAppState extends State<BibleApp> {
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class _BibleAppState extends State<BibleApp> {
           ),
         
       ),
-      home: const Home(),
+      home: Home(firebaseApp: _fbApp),
     );
   }
 }
