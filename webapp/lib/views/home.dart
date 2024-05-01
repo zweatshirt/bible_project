@@ -48,6 +48,7 @@ class _HomeState extends State<Home> {
             // ),
 
            <Widget>[
+            // Books view
             Container(
               child: 
                 FutureBuilder(
@@ -56,6 +57,99 @@ class _HomeState extends State<Home> {
                     if (snapshot.hasError) {
                       print("Error: ${snapshot.error.toString()}");
                       return const Text('Something went wrong!');
+                    }
+                    else if (snapshot.hasData) {
+                      print('Successful call!');
+                      return ListTile(
+                        // tileColor: index.isOdd ? oddItemColor : evenItemColor,
+                        tileColor: evenItemColor,
+                        title: const Text('meep'),
+                        hoverColor: colorScheme.primary.withOpacity(1),
+                        focusColor: oddItemColor,
+
+                      );
+                    }
+                    else {
+                       return const Center(
+                        child:  CircularProgressIndicator()
+                      );
+                    }
+                  
+                  }
+
+                ),
+            ),
+            // Chapters view
+            Container(
+              child: 
+                FutureBuilder(
+                  future: widget.firebaseApp,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      print("Error: ${snapshot.error.toString()}");
+                      return const Text('Something went wrong two!');
+                    }
+                    else if (snapshot.hasData) {
+                      print('Successful call!');
+                      return ListTile(
+                        // tileColor: index.isOdd ? oddItemColor : evenItemColor,
+                        tileColor: evenItemColor,
+                        title: const Text('meep'),
+                        hoverColor: colorScheme.primary.withOpacity(1),
+                        focusColor: oddItemColor,
+
+                      );
+                    }
+                    else {
+                       return const Center(
+                        child:  CircularProgressIndicator()
+                      );
+                    }
+                  
+                  }
+
+                ),
+            ),
+            // Verse search view
+            Container(
+              child: 
+                FutureBuilder(
+                  future: widget.firebaseApp,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      print("Error: ${snapshot.error.toString()}");
+                      return const Text('Something went wrong three!');
+                    }
+                    else if (snapshot.hasData) {
+                      print('Successful call!');
+                      return ListTile(
+                        // tileColor: index.isOdd ? oddItemColor : evenItemColor,
+                        tileColor: evenItemColor,
+                        title: const Text('meep'),
+                        hoverColor: colorScheme.primary.withOpacity(1),
+                        focusColor: oddItemColor,
+
+                      );
+                    }
+                    else {
+                       return const Center(
+                        child:  CircularProgressIndicator()
+                      );
+                    }
+                  
+                  }
+
+                ),
+            ),
+            // Dictionary view
+            Container(
+              child: 
+                FutureBuilder(
+                  future: widget.firebaseApp,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      print("Error: ${snapshot.error.toString()}");
+                      return const Text('Something went wrong Four!');
                     }
                     else if (snapshot.hasData) {
                       print('Successful call!');
