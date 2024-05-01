@@ -46,14 +46,13 @@ def main():
     # process = psutil.Process()
     # mem_size(process)
 
-    # the json file where the output must be stored 
-    b_two = {k: v for k, v in b_two.items() if v is not None}
-    # with open('bible.json', 'w', encoding='utf-8') as fp:
-    #     json.dump([dict(b), dict(b_two)], fp, indent=2)
-    with open('bible1.json', 'w', encoding='utf-8') as fp:
-        json.dump(dict(b), fp, indent=2)
-    with open('bible2.json', 'w', encoding='utf-8') as fp:
-        json.dump(dict(b_two), fp, indent=2)
+    # b_two = {k: v for k, v in b_two.items() if v is not None}
+    with open('bible.json', 'w', encoding='utf-8') as fp:
+        json.dump([dict(b), dict(b_two), dictionary_json], fp, indent=2)
+    # with open('bible1.json', 'w', encoding='utf-8') as fp:
+    #     json.dump(dict(b), fp, indent=2)
+    # with open('bible2.json', 'w', encoding='utf-8') as fp:
+    #     json.dump(dict(b_two), fp, indent=2)
 
         
 if __name__ == '__main__':
