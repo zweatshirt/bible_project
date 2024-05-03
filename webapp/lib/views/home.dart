@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return Text(snapshot.data?[index] ?? "Null value")  
+                          return Text(snapshot.data?[index] ?? "Null value");  
                         });
                     }
                     else {
@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return Text(snapshot.data?[index] ?? "Null value")  
+                          return Text(snapshot.data?[index] ?? "Null value");  
                         });
                     }
                     else {
@@ -160,7 +160,7 @@ class _HomeState extends State<Home> {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return Text(snapshot.data?[index] ?? "Null value")  
+                          return Text(snapshot.data?[index] ?? "Null value");
                         });
                     }
                     else {
