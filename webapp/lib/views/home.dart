@@ -24,13 +24,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
     final Color evenItemColor = colorScheme.primary.withOpacity(0.10);
     const int tabsCount = 4;
-  
+
+    // Update this method, which is intended to grab data from the rt db
+    Future<List<String>?> getData() async {
+       await Future.delayed(
+        const Duration(seconds: 2)
+       );
+    
+      return ["Temp list val"];
+    }
+
 
     return DefaultTabController(
       initialIndex: 0,
@@ -52,7 +62,7 @@ class _HomeState extends State<Home> {
             Container(
               child: 
                 FutureBuilder(
-                  future: widget.firebaseApp,
+                  future: getData(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       print("Error: ${snapshot.error.toString()}");
@@ -83,22 +93,19 @@ class _HomeState extends State<Home> {
             Container(
               child: 
                 FutureBuilder(
-                  future: widget.firebaseApp,
+                  future: getData(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       print("Error: ${snapshot.error.toString()}");
                       return const Text('Something went wrong two!');
                     }
-                    else if (snapshot.hasData) {
-                      print('Successful call!');
-                      return ListTile(
-                        // tileColor: index.isOdd ? oddItemColor : evenItemColor,
-                        tileColor: evenItemColor,
-                        title: const Text('meep'),
-                        hoverColor: colorScheme.primary.withOpacity(1),
-                        focusColor: oddItemColor,
-
-                      );
+                    else if (snapshot.hasData &&
+                             snapshot.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return Text(snapshot.data?[index] ?? "Null value")  
+                        });
                     }
                     else {
                        return const Center(
@@ -114,22 +121,19 @@ class _HomeState extends State<Home> {
             Container(
               child: 
                 FutureBuilder(
-                  future: widget.firebaseApp,
+                  future: getData(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       print("Error: ${snapshot.error.toString()}");
-                      return const Text('Something went wrong three!');
+                      return const Text('Something went wrong two!');
                     }
-                    else if (snapshot.hasData) {
-                      print('Successful call!');
-                      return ListTile(
-                        // tileColor: index.isOdd ? oddItemColor : evenItemColor,
-                        tileColor: evenItemColor,
-                        title: const Text('meep'),
-                        hoverColor: colorScheme.primary.withOpacity(1),
-                        focusColor: oddItemColor,
-
-                      );
+                    else if (snapshot.hasData &&
+                             snapshot.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return Text(snapshot.data?[index] ?? "Null value")  
+                        });
                     }
                     else {
                        return const Center(
@@ -145,22 +149,19 @@ class _HomeState extends State<Home> {
             Container(
               child: 
                 FutureBuilder(
-                  future: widget.firebaseApp,
+                  future: getData(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       print("Error: ${snapshot.error.toString()}");
-                      return const Text('Something went wrong Four!');
+                      return const Text('Something went wrong two!');
                     }
-                    else if (snapshot.hasData) {
-                      print('Successful call!');
-                      return ListTile(
-                        // tileColor: index.isOdd ? oddItemColor : evenItemColor,
-                        tileColor: evenItemColor,
-                        title: const Text('meep'),
-                        hoverColor: colorScheme.primary.withOpacity(1),
-                        focusColor: oddItemColor,
-
-                      );
+                    else if (snapshot.hasData &&
+                             snapshot.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return Text(snapshot.data?[index] ?? "Null value")  
+                        });
                     }
                     else {
                        return const Center(
