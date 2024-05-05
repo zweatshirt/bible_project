@@ -1,7 +1,5 @@
 import string
 
-BIBLE_FILE = 'bible/data_files/kjv_strongs.txt'
-
 
 def read_file(f_name: str) -> str:
     with open(f_name, 'r', encoding='utf-8') as file:

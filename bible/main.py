@@ -3,6 +3,7 @@ from bible_to_dicts.DictOne import DictOne
 from bible_to_dicts.DictTwo import DictTwo
 from mem_mgmt.mem_mgmt import *
 from defn_api_handling.defn_api_handling import *
+from constants import *
 import pickle  # will implement eventually
 import json
 

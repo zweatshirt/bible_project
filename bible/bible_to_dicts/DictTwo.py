@@ -1,7 +1,4 @@
-import string
-
 from bible_to_dicts.BibleDictionary import BibleDictionary
-from string import punctuation
 
 
 class DictTwo(BibleDictionary):

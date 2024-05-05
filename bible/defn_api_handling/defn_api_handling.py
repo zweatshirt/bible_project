@@ -3,15 +3,37 @@ import requests
 from time import sleep
 from bible_f_reading.bible_reading import read_file
 from bible_to_dicts.DictTwo import DictTwo
+from constants import *
+from open_api_key import OPEN_API_KEY
+from openai import OpenAI
+
+
 
 """
 TODO:
     The functions in this file have been modified but need to be properly tested.
 """
 
-DICTIONARY_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
-DEFINITIONS_JSON_FILE = 'bible/data_files/dictionary.json'
-LEFTOVER_WORDS_FILE = 'bible/data_files/unreadable_by_api.txt'
+client = OpenAI(api_key=OPEN_API_KEY) # chat gpt for words not provided by other API
+thread = assistant = message = None # used for openAI API
+
+
+def init_openai():
+    assistant = client.beta.assistants.create(
+        name="Dictionary",
+        instructions="You provide the definitions and pronunciation of Old English words as well as their modern counterparts, returning these details in a JSON object similar to this JSON object provided but better: [{\"word\":\"snuffed\",\"phonetics\":[],\"meanings\":[{\"partOfSpeech\":\"verb\",\"definitions\":[{\"definition\":\"To inhale through the nose.\",\"synonym\":[],\"antonyms\":[]},{\"definition\":\"To turn up the nose and inhale air, as an expression of contempt; hence, to take offence.\",\"synonyms\":[],\"antonyms\":[]}],\"synonyms\":[],\"antonyms\":[]},{\"partOfSpeech\":\"verb\",\"definitions\":[{\"definition\":\"To extinguish a candle or oil-lamp flame by covering the burning end of the wick until the flame is suffocated.\",\"synonyms\":[],\"antonyms\":[]},{\"definition\":\"To trim the burnt part of a candle wick.\",\"synonyms\":[],\"antonyms\":[]},{\"definition\":\"To kill a person; to snuff out.\",\"synonyms\":[],\"antonyms\":[]}],\"synonyms\":[],\"antonyms\":[]}],\"license\":{\"name\":\"CC BY-SA 3.0\",\"url\":\"https://creativecommons.org/licenses/by-sa/3.0\"},\"sourceUrls\":[\"https://en.wiktionary.org/wiki/snuff\",\"https://en.wiktionary.org/wiki/snuffed\"]}].",
+        model="gpt-4-turbo",
+    )
+
+    thread = client.beta.threads.create()
+
+def get_openai_api_data(word):
+    message = client.beta.threads.messages.create(
+    thread_id=thread.id,
+    role="user",
+    content=f"I need the JSON object containing the definition and other information of this word: {word}"
+)
+
 
 def append_api_data(d: DictTwo or []):
     """gets API data in the form of a json object and appends it to a .json f_name"""
@@ -23,23 +45,26 @@ def append_api_data(d: DictTwo or []):
                 f.write("{}\n".format(json_data))
 
 
-def get_api_data(word: str, sleep_time, sleep_count=0) -> str:
+def get_api_data(word: str, sleep_time, sleep_count=0, open_ai=False) -> str:
     """grabs definition of a given word from the API"""
-    word = word.casefold()  # hmmmm
-    try:
+    word = word.casefold()  # hmmm
+    if open_ai:
+        get_openai_api_data(word)
+    else: 
+        try:
 
-        res = requests.get(DICTIONARY_API + word, timeout=5)
-        return res.text if 'title' not in res.text else no_definition_for(word)
+            res = requests.get(DICTIONARY_API + word, timeout=5)
+            return res.text if 'title' not in res.text else no_definition_for(word)
 
-    except requests.exceptions.HTTPError:
-        if sleep_count == 5:
-            no_definition_for(word)
-            raise Exception(
-                'Unable to access {} for {}'.format(DICTIONARY_API, word)
-            )
-        sleep_count += 1
-        sleep(sleep_time)
-        get_api_data(word, sleep_time, sleep_count)
+        except requests.exceptions.HTTPError:
+            if sleep_count == 5:
+                no_definition_for(word)
+                raise Exception(
+                    'Unable to access {} for {}'.format(DICTIONARY_API, word)
+                )
+            sleep_count += 1
+            sleep(sleep_time)
+            get_api_data(word, sleep_time, sleep_count, open_ai=False)
 
 
 def no_definition_for(word: str):
