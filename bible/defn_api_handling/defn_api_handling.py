@@ -1,7 +1,7 @@
 from json import loads
 import requests
 from time import sleep
-from bible_f_reading.bible_reading import read_file
+
 from bible_to_dicts.DictTwo import DictTwo
 from constants import *
 from open_api_key import OPEN_API_KEY

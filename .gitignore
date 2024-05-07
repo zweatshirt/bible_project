@@ -1,2 +1,2 @@
 *.json
-bible\open_api_key.py
+bible/open_api_key.py
