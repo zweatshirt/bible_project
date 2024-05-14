@@ -35,11 +35,10 @@ Two dictionary datasets:
    and the total occurences of the Strongs.
    - These dictionaries are designed to interact with one another.
    - Dictionary Two contains the keys to access Dictionary One for accessing a list of all verses that contain the key word in O(n) time.
-      - Can probably be sped up to O(log(n)) or something... 
-3. Real time database
+      - Can probably be sped up to O(log(n)) or something...
+Real time database:
      - intend to load the database in on the site by chunks and categories to reduce computational and spatial complexity issues
-     - Unfortunately this database is a JSON object, which can be slow to access.
-4. Skeleton of a Flutter web application
+Skeleton of the Flutter web application (it just needs to be populated with data, then front end work)
 
 Script to access definitions API:
  - the current API used will need to be replaced ASAP (I am implementing ChatGPT API), it doesn't support many Old English words
@@ -47,10 +46,13 @@ Script to access definitions API:
 
 
 ## Work to be finished:
-1. Implementing ChatGPT API to find word definitions that the current API is unable to find.
+1. Implementing OpenAI API to find word definitions that the current API is unable to find.
 2. An NLP library needs to be implemented for phrase searching still.
-3. The front end work that needs to be finished, is well, the entire actual application.
-   - Currently, a Flutter application exists but needs to populated with the data in the backend
+3. The front end work that needs to be finished:
+   - Currently, a Flutter application exists but needs to populated with the data from the DB.
+   - Standalone dictionary for definitions
+   - Click on words to retreive definitions and other locations
+   - Verse searching field
 
 
 ## Special thanks to:
