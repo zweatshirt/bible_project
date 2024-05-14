@@ -29,22 +29,26 @@ Occurrences will be countable by the entire bible, by book, and by chapter.
 
 ## What is finished: 
 Two dictionary datasets:
-1. A dictionary that allows quick accessing to all books of the bible by book, chapter, verse
-2. A dictionary of all words in the bible, with (most) definitions successfully mapped,
+1. "Dictionary One" that allows quick accessing to all books of the bible by book, chapter, verse
+2. "Dictionary Two" of all words in the bible, with (most) definitions successfully mapped,
    all verses where that word appears, the total occurences of the word,
    and the total occurences of the Strongs.
 - These dictionaries are designed to interact with one another.
+- Dictionary Two contains the keys to access Dictionary One.  
+3. Real time database
+     - intend to load the database in on the site by chunks and categories to reduce computational and spatial complexity issues
+4. Skeleton of a Flutter web application
 
 Script to access definitions API:
-(the API used will need to be replaced, it doesn't support many Old English words)
+ - the current API used will need to be replaced ASAP (I am implementing ChatGPT API), it doesn't support many Old English words
 [Free Dictionary API](https://dictionaryapi.dev)
 
 
 ## Work to be finished:
-1. The backend work that needs to be finished is using Redis.
+1. Implementing ChatGPT API to find word definitions that the current API is unable to find.
 2. An NLP library needs to be implemented for phrase searching still.
 3. The front end work that needs to be finished, is well, the entire actual application.
-4. The code will probably changed to JavaScript which is daunting.
+   - Currently, a Flutter application exists but needs to populated with the data in the backend
 
 
 ## Special thanks to:
