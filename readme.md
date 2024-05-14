@@ -18,7 +18,7 @@ centered around the 1611 King James Bible.
 The application will include:
 1. A (free) reader of the bible.
 2. Ability to press on words as you read to get immediate definitions,   
-and a list of other verses where the word is located in the bible per Strong's Concordance.
+and a list of other verses where the word is located in the bible.
 3. A stand-alone dictionary of all the words.
 4. Phrase searching using an NLP library. 
 5. Ability to get counts of all word occurrences. 
