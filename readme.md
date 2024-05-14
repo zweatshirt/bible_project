@@ -29,12 +29,12 @@ Occurrences will be countable by the entire bible, by book, and by chapter.
 
 ## What is finished: 
 Two dictionary datasets:
-1. "Dictionary One" that allows quick accessing to all books of the bible by book, chapter, verse
+1. "Dictionary One" that allows O(1) accessing to all books of the bible by book, chapter, verse
 2. "Dictionary Two" of all words in the bible, with (most) definitions successfully mapped,
    all verses where that word appears, the total occurences of the word,
    and the total occurences of the Strongs.
-- These dictionaries are designed to interact with one another.
-- Dictionary Two contains the keys to access Dictionary One.  
+   - These dictionaries are designed to interact with one another.
+   - Dictionary Two contains the keys to access Dictionary One for accessing a list of all verses that contain the key word in O(n) time.  
 3. Real time database
      - intend to load the database in on the site by chunks and categories to reduce computational and spatial complexity issues
 4. Skeleton of a Flutter web application
